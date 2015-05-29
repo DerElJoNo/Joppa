@@ -14,6 +14,12 @@ public class Joppa extends Actor
     public int y;
     public int Luft=100;
     public int Schlüssel;
+    public Inventar inv;
+    public Joppa()
+    {
+        inv = new Inventar();
+    }
+    
     /**
      * Act - do whatever the Joppa wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
@@ -37,7 +43,9 @@ public class Joppa extends Actor
     {
         if(getOneObjectAtOffset(0,0,Item.class)!=null && Greenfoot.isKeyDown("e"))
         {
-            getWorld().removeObject(getOneObjectAtOffset(0,0,Item.class));
+            Item i = (Item)getOneObjectAtOffset(0,0,Item.class);
+            inv.einfügen(i);
+            getWorld().removeObject(i);
         }
     }
     
