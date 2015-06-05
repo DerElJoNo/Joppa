@@ -6,9 +6,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Tür extends Actor
+public class Tür extends Block
 {
-    public boolean offen = false;
+    public boolean durchlässig = false;
     
     /**
      * Act - do whatever the Tür wants to do. This method is called whenever
@@ -24,8 +24,8 @@ public class Tür extends Actor
      */
     public void open()
     {
-        offen = true;
-        setImage("Tür(offen).png");
+        durchlässig = true;
+        setImage("Tür(geöffnet).png");
     }
     
     /**
@@ -33,7 +33,15 @@ public class Tür extends Actor
      */
     public void close()
     {
-        offen = false;
+        durchlässig = false;
         setImage("Tür(geschlossen).png");
+    }
+    
+    /**
+     * 
+     */
+    public boolean offen()
+    {
+        return durchlässig;
     }
 }

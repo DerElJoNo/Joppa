@@ -6,7 +6,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Wasser extends Actor
+public class Wasser extends Block
 {
     /**
      * Act - do whatever the Wasser wants to do. This method is called whenever
@@ -16,6 +16,7 @@ public class Wasser extends Actor
     {
         fließen();
         changePicture();
+        setDurchlässig();
     }
     
     /**

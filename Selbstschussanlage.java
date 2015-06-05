@@ -6,7 +6,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Selbstschussanlage extends Actor
+public class Selbstschussanlage extends Block
 {
     public int Munition=6;
     /**
@@ -24,6 +24,7 @@ public class Selbstschussanlage extends Actor
             schießen();
         }
         nachladen();
+        setUndurchlässig();
     }   
     
     /**

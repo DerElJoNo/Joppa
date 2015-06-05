@@ -6,7 +6,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Munition extends Actor
+public class Munition extends Block
 {
     public double X1;
     public double Y1;
@@ -34,6 +34,7 @@ public class Munition extends Actor
         fliegen();
         setRotation(R);
         auflösen();
+        setDurchlässig();
     }
     
     /**
