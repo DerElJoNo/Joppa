@@ -6,23 +6,19 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Welt extends World
+public class Level extends World
 {
     
     Joppa joppa1 = new Joppa();
     
-    public int i=0;
     /**
      * Constructor for objects of class Level1.
      * 
      */
-    public Welt()
+    public Level()
     {    
-        // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(35, 20, 17);
-        
         generiereWelt();
-        
         setzteSpieler();
     }
     
@@ -36,6 +32,10 @@ public class Welt extends World
         addObject(lebensleiste,3,1);
         Luftleiste luftleiste = new Luftleiste();
         addObject(luftleiste,31,1);
+        for(int i=0; i< joppa1.inv.größe() && i<22; i++)
+        {
+            addObject(new Inventarfeld(i), 13 + i, 1);
+        }
     }
     
     /**

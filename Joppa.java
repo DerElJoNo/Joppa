@@ -14,6 +14,8 @@ public class Joppa extends Actor
     public int y;
     public int Luft=100;
     public Inventar inv;
+    public GreenfootImage joppa;
+    public boolean left;
     
     public Joppa()
     {
@@ -26,14 +28,66 @@ public class Joppa extends Actor
      */
     public void act() 
     {
-        gehen();
+        bewegen();
         zurücksetzen();
-        fallen();
         verbrennen();
         getroffenWerden();
-        schwimmen();
         öffnen();
         aufsammeln();
+        fallen();
+        setzen();
+        essen();
+    }
+    
+    public Inventar inv()
+    {
+        return inv;
+    }
+    
+    /**
+     * 
+     */
+    public void essen()
+    {
+        if(getOneObjectAtOffset(0,0,Item.class)!=null && Greenfoot.isKeyDown("q"))
+        {
+            Item i = (Item)getOneObjectAtOffset(0,0,Item.class);
+            if(i.verzehr()==true && 100 >= i.hungerpunkte()+ Leben)
+            {
+                Leben = Leben + i.hungerpunkte();
+                getWorld().removeObject(i);
+            }
+            if(i.verzehr()==true && 100 < i.hungerpunkte()+ Leben)
+            {
+                Leben = 100;
+                getWorld().removeObject(i);
+            }
+        }
+    }
+    
+    /**
+     * 
+     */
+    public void setzen()
+    {
+        for(int i=0; i<inv.größe()+1; i++)
+        {
+             if(Greenfoot.isKeyDown(Integer.toString(i+1)))
+             {
+                 Item a = inv.ausgeben(i);
+                 if(a!=null)
+                 {
+                     if(left==true)
+                     {
+                         getWorld().addObject(a,getX()-1,getY());
+                     }
+                     if(left!=true)
+                     {
+                         getWorld().addObject(a,getX()+1,getY());
+                     }
+                 }
+             }
+        }
     }
     
     /**
@@ -57,7 +111,7 @@ public class Joppa extends Actor
         if(getOneObjectAtOffset(-1,0,Tür.class)!=null && Greenfoot.isKeyDown("o"))
         {
             Tür tür = (Tür)getOneObjectAtOffset(-1,0,Tür.class);
-            for(int i =0; i<8; i++)
+            for(int i=0; i<inv.größe(); i++)
             {
                 Item a = inv.ausgeben(i);
                 if(a != null)
@@ -66,65 +120,40 @@ public class Joppa extends Actor
                     {
                         tür.open();
                     }
+                    if(tür.offen()==true)
+                    {
+                        return;
+                    }
+                    if(a.getClass()!=Schlüssel.class)
+                    {
+                        inv.einfügen(a);
+                    }
                 }
             }
         }
-    }
-    
-    /**
-     * 
-     */
-    public void schwimmen()
-    {
-        if(Greenfoot.isKeyDown("left")&& getOneObjectAtOffset(-1,0,Wasser.class)!=null)
-        {
-            setLocation(getX()-1,getY());
-            setImage("Joppa_links.png");
-        }
         
-        if(Greenfoot.isKeyDown("right")&& getOneObjectAtOffset(1,0,Wasser.class)!=null)
+        if(getOneObjectAtOffset(1,0,Tür.class)!=null && Greenfoot.isKeyDown("o"))
         {
-            setLocation(getX()+1,getY());
-            setImage("Joppa_rechts.png");
-        }
-        
-        if(Greenfoot.isKeyDown("up") && getOneObjectAtOffset(0,-1,Wasser.class)!=null)
-        {
-            setLocation(getX(),getY()-1);
-        }
-        
-        if(Greenfoot.isKeyDown("down") && getOneObjectAtOffset(0,1,Wasser.class)!=null)
-        {
-            setLocation(getX(),getY()+1);
-        }
-        
-        if(Greenfoot.isKeyDown("space") && getOneObjectAtOffset(0,0,Wasser.class)!=null)
-        {
-            if(getOneObjectAtOffset(1,0,Wand.class)!=null)
+            Tür tür = (Tür)getOneObjectAtOffset(1,0,Tür.class);
+            for(int i=0; i<inv.größe(); i++)
             {
-                setImage("Joppa_rechts.png");
-                setLocation(getX(),getY()-1);
+                Item a = inv.ausgeben(i);
+                if(a != null)
+                {
+                    if(a.getClass()==Schlüssel.class && tür.offen()==false)
+                    {
+                        tür.open();
+                    }
+                    if(tür.offen()==true)
+                    {
+                        return;
+                    }
+                    if(a.getClass()!=Schlüssel.class)
+                    {
+                        inv.einfügen(a);
+                    }
+                }
             }
-            
-            if(getOneObjectAtOffset(-1,0,Wand.class)!=null)
-            {
-                setImage("Joppa_links.png");
-                setLocation(getX(),getY()-1);
-            }
-        }
-        
-        if(getOneObjectAtOffset(0,-1,Wasser.class)!=null && getOneObjectAtOffset(0,0,Wasser.class)!=null)
-        {
-            Luft=Luft-2;
-            if(Luft <= 1)
-            {
-                Leben=Leben-5;
-            }
-        }
-        
-        if(getOneObjectAtOffset(0,0,Wasser.class)==null)
-        {
-            Luft=100;
         }
     }
     
@@ -169,26 +198,6 @@ public class Joppa extends Actor
     /**
      * 
      */
-    public void fallen()
-    {
-        if(getOneObjectAtOffset(0,1,Wand.class)==null && getOneObjectAtOffset(0,1,Leiter.class)==null && getOneObjectAtOffset(0,0,Wasser.class)==null)
-        {
-            setLocation(getX(),getY()+1);
-            Fallhöhe++;
-            if(getOneObjectAtOffset(0,1,Wand.class)!=null || getOneObjectAtOffset(0,1,Leiter.class)!=null)
-            {
-                if(Fallhöhe>=5)
-                {
-                    Leben= Leben-2*((Fallhöhe*175/104)-(Fallhöhe*Fallhöhe*7/208));
-                }
-                Fallhöhe=0;
-            }
-        }
-    }
-    
-    /**
-     * 
-     */
     public void zurücksetzen()
     {
         if(Greenfoot.isKeyDown("r")||Leben<=0)
@@ -202,7 +211,7 @@ public class Joppa extends Actor
     /**
      * 
      */
-    public void gehen()
+    public void bewegen()
     {
         Block o = (Block)getOneObjectAtOffset(0,-1,Block.class);
         Block u = (Block)getOneObjectAtOffset(0,1,Block.class);
@@ -215,16 +224,16 @@ public class Joppa extends Actor
             if(l==null)
             {
                 setLocation(getX()-1,getY());
-                setImage("Joppa_links.png");
             }
             if(l!=null)
             {
                 if(l.durchlässig()==true)
                 {
                     setLocation(getX()-1,getY());
-                    setImage("Joppa_links.png");
                 }
             }
+            left = true;
+            setImage("Joppa_links.png");
         }
         
         if(Greenfoot.isKeyDown("right"))
@@ -232,33 +241,54 @@ public class Joppa extends Actor
             if(r==null)
             {
                 setLocation(getX()+1,getY());
-                setImage("Joppa_rechts.png");
             }
             if(r!=null)
             {
                 if(r.durchlässig()==true)
                 {
                     setLocation(getX()+1,getY());
-                    setImage("Joppa_rechts.png");
                 }
             }
+            left = false;
+            setImage("Joppa_rechts.png");
         }
         
-        
-        
-        if(getOneObjectAtOffset(0,0,Leiter.class)!=null && getOneObjectAtOffset(0,-1,Wand.class)==null)
+        if(Greenfoot.isKeyDown("up"))
         {
-            if(Greenfoot.isKeyDown("up"))
+            if(o!=null && o.gravitation()==false && p!=null && p.gravitation==false)
             {
                 setLocation(getX(),getY()-1);
             }
         }
         
-        if(getOneObjectAtOffset(0,1,Leiter.class)!=null && getOneObjectAtOffset(0,0,Wand.class)==null)
+        if(Greenfoot.isKeyDown("down"))
         {
-            if(Greenfoot.isKeyDown("down"))
+            if(u!=null && u.durchlässig()==true)
             {
                 setLocation(getX(),getY()+1);
+            }
+        }
+        
+        if(getOneObjectAtOffset(0,-1,Wasser.class)!=null && getOneObjectAtOffset(0,0,Wasser.class)!=null)
+        {
+            Luft=Luft-2;
+            if(Luft <= 1)
+            {
+                Leben=Leben-5;
+            }
+        }
+        
+        if(getOneObjectAtOffset(0,-1,Wasser.class)==null)
+        {
+            Luft=100;
+        }
+        
+        if(getOneObjectAtOffset(0,-1,Wand.class)==null && Greenfoot.isKeyDown("space"))
+        {
+            if(getOneObjectAtOffset(0,1,Wand.class)!=null && getOneObjectAtOffset(0,0,Leiter.class)==null || getOneObjectAtOffset(0,1,Leiter.class)!=null)
+            {
+                setLocation(getX(),getY()-2);
+                setLocation(getX(),getY());
             }
         }
         
@@ -267,6 +297,32 @@ public class Joppa extends Actor
             if(getOneObjectAtOffset(0,1,Wand.class)!=null && getOneObjectAtOffset(0,0,Leiter.class)==null || getOneObjectAtOffset(0,1,Leiter.class)!=null)
             {
                 setLocation(getX(),getY()-2);
+                setLocation(getX(),getY());
+            }
+            if(getOneObjectAtOffset(0,0,Wasser.class)!=null && (getOneObjectAtOffset(1,0,Wand.class)!=null || getOneObjectAtOffset(-1,0,Wand.class)!=null))
+            {
+                setLocation(getX(),getY()-2);
+                setLocation(getX(),getY());
+            }
+        }
+    }
+    
+    /**
+     * 
+     */
+    public void fallen()
+    {
+        if(getOneObjectAtOffset(0,1,Wand.class)==null && getOneObjectAtOffset(0,1,Leiter.class)==null && getOneObjectAtOffset(0,0,Wasser.class)==null)
+        {
+            setLocation(getX(),getY()+1);
+            Fallhöhe++;
+            if(getOneObjectAtOffset(0,1,Wand.class)!=null || getOneObjectAtOffset(0,1,Leiter.class)!=null)
+            {
+                if(Fallhöhe>=4)
+                {
+                    Leben= Leben-2*((Fallhöhe*175/104)-(Fallhöhe*Fallhöhe*7/208)-(5/26));
+                }
+                Fallhöhe=0;
             }
         }
     }

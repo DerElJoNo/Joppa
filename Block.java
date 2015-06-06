@@ -17,8 +17,8 @@ public class Block extends Actor
         // Add your action code here.
     }
     
-    boolean durchlässig;
-    boolean gravitation;
+    public boolean durchlässig;
+    public boolean gravitation;
     
     /**
      * 

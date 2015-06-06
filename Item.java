@@ -14,6 +14,42 @@ public class Item extends Actor
      */
     public void act() 
     {
-        // Add your action code here.
-    }    
+        
+    }
+    
+    public boolean verzehr;
+    public String itemBild;
+    public int hungerpunkte;
+    
+    public GreenfootImage itemBild()
+    {
+        setImage(itemBild);
+        return getImage();
+    }
+    
+    public void setItemBild(String x)
+    {
+        itemBild = x;
+    }
+    
+    public boolean verzehr()
+    {
+        return verzehr;
+    }
+    
+    public int hungerpunkte()
+    {
+        return hungerpunkte;
+    }
+    
+    public void ungenießbar()
+    {
+        verzehr = false;
+    }
+    
+    public void lecker(int x)
+    {
+        verzehr = true;
+        hungerpunkte = x;
+    }
 }

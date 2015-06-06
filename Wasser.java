@@ -17,6 +17,7 @@ public class Wasser extends Block
         fließen();
         changePicture();
         setDurchlässig();
+        gravitationAus();
     }
     
     /**

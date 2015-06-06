@@ -16,7 +16,7 @@ public class Lebensleiste extends Actor
     public void act() 
     {
         World world = getWorld();
-        Welt welt = (Welt)world;
+        Level welt = (Level)world;
         Joppa joppa1 = welt.joppa1();
         Leben = joppa1.Leben();
         

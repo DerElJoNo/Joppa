@@ -2,13 +2,17 @@
 public class Inventar  
 {
     Item[] inventar;
-    final int inventargröße = 8;
+    final int inventargröße = 9;
     
     public Inventar()
     {
         inventar = new Item[inventargröße];
     }
     
+    public int größe()
+    {
+        return inventargröße;
+    }
     
     public boolean einfügen(Item item) 
     {
@@ -29,6 +33,4 @@ public class Inventar
         inventar[i]=null;
         return result;
     }
-    
-    
 }

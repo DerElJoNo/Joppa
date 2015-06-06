@@ -24,6 +24,7 @@ public class Tür extends Block
      */
     public void open()
     {
+        setDurchlässig();
         durchlässig = true;
         setImage("Tür(geöffnet).png");
     }
@@ -33,6 +34,7 @@ public class Tür extends Block
      */
     public void close()
     {
+        setUndurchlässig();
         durchlässig = false;
         setImage("Tür(geschlossen).png");
     }

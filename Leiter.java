@@ -15,5 +15,6 @@ public class Leiter extends Block
     public void act() 
     {
         setDurchlässig();
+        gravitationAus();
     }    
 }

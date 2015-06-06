@@ -1,20 +1,20 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Schlüssel here.
+ * Write a description of class Kuchen here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Schlüssel extends Item
+public class Kuchen extends Item
 {
     /**
-     * Act - do whatever the Schlüssel wants to do. This method is called whenever
+     * Act - do whatever the Kuchen wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act() 
     {
-        setItemBild("Schlüssel(Item).png");
-        ungenießbar();
-    }
+        setItemBild("Kuchen(Item).png");
+        lecker(15);
+    }    
 }
