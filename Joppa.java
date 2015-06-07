@@ -202,9 +202,10 @@ public class Joppa extends Actor
     {
         if(Greenfoot.isKeyDown("r")||Leben<=0)
         {
-           setLocation(33,18);
+           World world = getWorld();
+           Level w = (Level)world;
+           w.setzeSpieler();
            setImage("Joppa_links.png");
-           Leben=100;
         }
     }
     
