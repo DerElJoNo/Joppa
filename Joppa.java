@@ -70,7 +70,7 @@ public class Joppa extends Actor
      */
     public void setzen()
     {
-        for(int i=0; i<inv.größe()+1; i++)
+        for(int i=0; i<inv.größe(); i++)
         {
              if(Greenfoot.isKeyDown(Integer.toString(i+1)))
              {
