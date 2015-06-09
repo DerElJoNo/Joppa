@@ -26,15 +26,6 @@ public class Level extends World
         return level;
     }
     
-    public Level level(int i)
-    {
-        if(i==level)
-        {
-            return this;
-        }
-        return null;
-    }
-    
     public void setLevel(int x)
     {
         level = x;
