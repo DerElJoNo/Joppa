@@ -19,14 +19,9 @@ public class Ziel extends Actor
         if(getOneObjectAtOffset(0,0,Joppa.class)!=null && Greenfoot.isKeyDown("o"))
         {
             World welt = getWorld();
-            Level w = (Level) welt;
-            level = w.levelType();
-            nextLevel = level+1;
-            Level L = w.level(nextLevel);
-            if(L!=null)
-            {
-                Greenfoot.setWorld(L);
-            }
+            Level aktuellesLevel = (Level) welt;
+            Level naechstesLevel = LevelManager.getInstance().getNextLevel(aktuellesLevel);
+            Greenfoot.setWorld(naechstesLevel);
         }
     }
 }
