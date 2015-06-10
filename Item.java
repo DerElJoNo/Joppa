@@ -28,27 +28,6 @@ public class Item extends Actor
     
     public void setItemBild(String x)
     {
-    }
         itemBild = new GreenfootImage(x);
-    
-    public boolean verzehr()
-    {
-        return verzehr;
-    }
-    
-    public int hungerpunkte()
-    {
-        return hungerpunkte;
-    }
-    
-    public void ungenießbar()
-    {
-        verzehr = false;
-    }
-    
-    public void lecker(int x)
-    {
-        verzehr = true;
-        hungerpunkte = x;
     }
 }

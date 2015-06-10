@@ -52,14 +52,15 @@ public class Joppa extends Actor
         if(getOneObjectAtOffset(0,0,Item.class)!=null && Greenfoot.isKeyDown("q"))
         {
             Item i = (Item)getOneObjectAtOffset(0,0,Item.class);
-            if(i.verzehr()==true && 100 >= i.hungerpunkte()+ Leben)
-            {
-                Leben = Leben + i.hungerpunkte();
-                getWorld().removeObject(i);
-            }
-            if(i.verzehr()==true && 100 < i.hungerpunkte()+ Leben)
-            {
-                Leben = 100;
+            
+            if( i instanceof Essbar ){
+                Essbar essen = (Essbar) i;
+            
+                if( 100 >= essen.getHungerpunkte() + Leben) {
+                    Leben = Leben + essen.getHungerpunkte();
+                } else {
+                    Leben = 100;
+                }
                 getWorld().removeObject(i);
             }
         }

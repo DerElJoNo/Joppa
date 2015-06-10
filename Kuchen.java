@@ -6,7 +6,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Kuchen extends Item
+public class Kuchen extends Item implements Essbar
 {
     /**
      * Act - do whatever the Kuchen wants to do. This method is called whenever
@@ -15,6 +15,9 @@ public class Kuchen extends Item
     public void act() 
     {
         setItemBild("Kuchen(Item).png");
-        lecker(15);
-    }    
+    }
+    
+    public int getHungerpunkte() {
+        return 15;
+    }
 }

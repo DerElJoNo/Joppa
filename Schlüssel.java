@@ -15,6 +15,5 @@ public class Schlüssel extends Item
     public void act() 
     {
         setItemBild("Schlüssel(Item).png");
-        ungenießbar();
     }
 }
