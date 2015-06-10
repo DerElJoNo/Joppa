@@ -8,6 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Level extends World
 {
+    public static final int SIZE = 17;
     int x;
     int y;
     int level;
@@ -18,7 +19,7 @@ public class Level extends World
      */
     public Level()
     {    
-        super(45, 30, 17);
+        super(765, 510, 1);
     }
     
     public int levelType()
@@ -44,9 +45,10 @@ public class Level extends World
     {
         
         Lebensleiste lebensleiste = new Lebensleiste();
-        addObject(lebensleiste, 4, 1);
+        addObject(lebensleiste, 5 * SIZE, SIZE);
+        
         Luftleiste luftleiste = new Luftleiste();
-        addObject(luftleiste, getWidth()-5, 1);
+        addObject(luftleiste, getWidth()-(5 * SIZE), SIZE);
         
         for(int a=0; a<getWidth(); a++)
         {
@@ -62,7 +64,7 @@ public class Level extends World
         
         for(int i=0; i< joppa1.inv.größe(); i++)
         {
-            addObject(new Inventarfeld(i), (getWidth() - joppa1.inv.größe())/2 + i, 1);
+            addObject(new Inventarfeld(i), getWidth() - joppa1.inv.größe()/2 + i * SIZE, SIZE);
         }
     }
     
