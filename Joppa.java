@@ -109,9 +109,18 @@ public class Joppa extends Actor
      */
     public void öffnen()
     {
-        if(getOneObjectAtOffset(-1,0,Tür.class)!=null && Greenfoot.isKeyDown("o"))
-        {
-            Tür tür = (Tür)getOneObjectAtOffset(-1,0,Tür.class);
+        if ( Greenfoot.isKeyDown("o") ){
+            
+            Tür tür;
+            
+            if(getOneObjectAtOffset(-1, 0, Tür.class) != null) {
+                tür = (Tür) getOneObjectAtOffset(-1, 0, Tür.class);
+            } else if (getOneObjectAtOffset(1, 0, Tür.class) != null) {
+                tür = (Tür) getOneObjectAtOffset(1, 0, Tür.class);
+            } else {
+                return;
+            }
+            
             for(int i=0; i<inv.größe(); i++)
             {
                 Item a = inv.ausgeben(i);
@@ -131,32 +140,9 @@ public class Joppa extends Actor
                     }
                 }
             }
-        }
-        
-        if(getOneObjectAtOffset(1,0,Tür.class)!=null && Greenfoot.isKeyDown("o"))
-        {
-            Tür tür = (Tür)getOneObjectAtOffset(1,0,Tür.class);
-            for(int i=0; i<inv.größe(); i++)
-            {
-                Item a = inv.ausgeben(i);
-                if(a != null)
-                {
-                    if(a.getClass()==Schlüssel.class && tür.offen()==false)
-                    {
-                        tür.open();
-                    }
-                    if(tür.offen()==true)
-                    {
-                        return;
-                    }
-                    if(a.getClass()!=Schlüssel.class)
-                    {
-                        inv.einfügen(a);
-                    }
-                }
-            }
-        }
+        }        
     }
+
     
     /**
      * 
