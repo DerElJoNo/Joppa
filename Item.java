@@ -18,19 +18,18 @@ public class Item extends Actor
     }
     
     public boolean verzehr;
-    public String itemBild;
+    public GreenfootImage itemBild;
     public int hungerpunkte;
     
-    public GreenfootImage itemBild()
+    public GreenfootImage getItemBild()
     {
-        setImage(itemBild);
-        return getImage();
+        return itemBild;
     }
     
     public void setItemBild(String x)
     {
-        itemBild = x;
     }
+        itemBild = new GreenfootImage(x);
     
     public boolean verzehr()
     {

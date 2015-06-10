@@ -27,7 +27,7 @@ public class Inventarfeld extends Actor
         }
         if(i!=null)
         {
-            a.drawImage(i.itemBild(),0,0);
+            a.drawImage(i.getItemBild(),0,0);
         }
     }
     public Inventar inv;
