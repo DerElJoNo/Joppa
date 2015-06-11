@@ -27,6 +27,15 @@ public class Inventar
         return false;
     }
     
+    public boolean voll()
+    {
+        if(inventar[8]==null)
+        {
+            return false;
+        }
+        return true;
+    }
+    
     public Item ausgeben(int i) 
     {
         Item result = inventar[i];

@@ -20,11 +20,8 @@ public class Inventarfeld extends Actor
         inv = joppa1.inv();
         Item i = inv.ausgeben(position);
         inv.einfügen(i);
+        setImage("Inventar.png");
         GreenfootImage a = getImage();
-        if(i==null)
-        {
-            setImage("Inventar.png");
-        }
         if(i!=null)
         {
             a.drawImage(i.getItemBild(),0,0);

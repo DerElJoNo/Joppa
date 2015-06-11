@@ -96,7 +96,7 @@ public class Joppa extends Actor
      */
     public void aufsammeln()
     {
-        if(getOneObjectAtOffset(0,0,Item.class)!=null && Greenfoot.isKeyDown("e"))
+        if(getOneObjectAtOffset(0,0,Item.class)!=null && Greenfoot.isKeyDown("e") && inv.voll()==false)
         {
             Item i = (Item)getOneObjectAtOffset(0,0,Item.class);
             inv.einfügen(i);
