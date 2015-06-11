@@ -20,25 +20,25 @@ public class Lebensleiste extends Actor
         Joppa joppa1 = welt.joppa1();
         Leben = joppa1.Leben();
         
-        setImage(new GreenfootImage(102,17));
+        setImage(new GreenfootImage(102,16));
         GreenfootImage Leiste = getImage();
         Leiste.setColor(Color.GRAY);
-        Leiste.fillRect(0,0,102,17);
+        Leiste.fillRect(0,0,102,16);
         
         if(Leben>=66)
         {
             Leiste.setColor(Color.GREEN);
-            Leiste.fillRect(1,1,Leben,15);
+            Leiste.fillRect(1,1,Leben,14);
         }
         if(Leben>=34 && Leben <=65)
         {
             Leiste.setColor(Color.YELLOW);
-            Leiste.fillRect(1,1,Leben,15);
+            Leiste.fillRect(1,1,Leben,14);
         }
         if(Leben <=33)
         {
             Leiste.setColor(Color.RED);
-            Leiste.fillRect(1,1,Leben,15);
+            Leiste.fillRect(1,1,Leben,14);
         }
     }
 }

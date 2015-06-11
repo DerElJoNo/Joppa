@@ -18,12 +18,5 @@ public class No3 extends Level
         setzeStandart();
         setLevel(3);
         setzeSpieler();
-        generiereWelt();
-    }
-    
-    public void generiereWelt()
-    {
-        Ziel ziel = new Ziel();
-        addObject(ziel, 5, 28);
     }
 }

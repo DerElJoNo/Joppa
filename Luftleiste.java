@@ -20,20 +20,20 @@ public class Luftleiste extends Actor
         Joppa joppa1 = welt.joppa1();
         Luft = joppa1.Luft();
         
-        setImage(new GreenfootImage(102,17));
+        setImage(new GreenfootImage(102,16));
         GreenfootImage Leiste = getImage();
         Leiste.setColor(Color.GRAY);
-        Leiste.fillRect(0,0,102,17);
+        Leiste.fillRect(0,0,102,16);
         
         if(Luft >=50)
         {
             Leiste.setColor(Color.CYAN);
-            Leiste.fillRect(1,1,Luft,15);
+            Leiste.fillRect(1,1,Luft,14);
         }
         if(Luft <=49)
         {
             Leiste.setColor(Color.blue);
-            Leiste.fillRect(1,1,Luft,15);
+            Leiste.fillRect(1,1,Luft,14);
         }
     }
 }

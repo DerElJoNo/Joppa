@@ -8,7 +8,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Level extends World
 {
-    public static final int SIZE = 17;
+    public static final int SIZE = 16;
+    public int MITTE = SIZE / 2;
     int x;
     int y;
     int level;
@@ -19,7 +20,7 @@ public class Level extends World
      */
     public Level()
     {    
-        super(765, 510, 1);
+        super(45*SIZE, 30*SIZE, 1);
     }
     
     public int levelType()
@@ -34,8 +35,8 @@ public class Level extends World
     
     public void setzeSpieler()
     {
-        addObject(joppa1, 42, 28);
-        joppa1.setLocation(42, 28);
+        addObject(joppa1, 42 * SIZE, 28 * SIZE);
+        joppa1.setLocation(42 * SIZE, 28 * SIZE);
     }
     
     /**
@@ -45,26 +46,26 @@ public class Level extends World
     {
         
         Lebensleiste lebensleiste = new Lebensleiste();
-        addObject(lebensleiste, 5 * SIZE, SIZE);
+        addObject(lebensleiste, 5 * SIZE + MITTE, SIZE + MITTE);
         
         Luftleiste luftleiste = new Luftleiste();
-        addObject(luftleiste, getWidth()-(5 * SIZE), SIZE);
+        addObject(luftleiste, getWidth()-(5 * SIZE + MITTE), SIZE + MITTE);
         
-        for(int a=0; a<getWidth(); a++)
+        for(int a= MITTE; a<getWidth(); a = a + SIZE)
         {
-            addObject(new Wand(), a, 0);
-            addObject(new Wand(), a, getHeight()-1);
+            addObject(new Wand(), a, MITTE);
+            addObject(new Wand(), a, getHeight() - MITTE);
         }
         
-        for(int b=1; b<getHeight(); b++)
+        for(int b= MITTE; b<getHeight(); b = b + SIZE)
         {
-            addObject(new Wand(), 0, b);
-            addObject(new Wand(), getWidth()-1, b);
+            addObject(new Wand(), MITTE, b);
+            addObject(new Wand(), getWidth() - MITTE, b);
         }
         
         for(int i=0; i< joppa1.inv.größe(); i++)
         {
-            addObject(new Inventarfeld(i), getWidth() - joppa1.inv.größe()/2 + i * SIZE, SIZE);
+            addObject(new Inventarfeld(i), (getWidth()/2) - (joppa1.inv.größe() * SIZE / 2) + (i * SIZE) + MITTE, SIZE + MITTE);
         }
     }
     
