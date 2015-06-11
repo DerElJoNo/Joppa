@@ -80,11 +80,11 @@ public class Joppa extends Actor
                  {
                      if(left==true)
                      {
-                         getWorld().addObject(a,getX()-1,getY());
+                         getWorld().addObject(a,getX()-16,getY());
                      }
                      if(left!=true)
                      {
-                         getWorld().addObject(a,getX()+1,getY());
+                         getWorld().addObject(a,getX()+16,getY());
                      }
                  }
              }
@@ -109,10 +109,9 @@ public class Joppa extends Actor
      */
     public void öffnen()
     {
-        if ( Greenfoot.isKeyDown("o") ){
-            
+        if ( Greenfoot.isKeyDown("o") )
+        {
             Tür tür;
-            
             if(getOneObjectAtOffset(-1, 0, Tür.class) != null) {
                 tür = (Tür) getOneObjectAtOffset(-1, 0, Tür.class);
             } else if (getOneObjectAtOffset(1, 0, Tür.class) != null) {
@@ -193,6 +192,8 @@ public class Joppa extends Actor
            Level w = (Level)world;
            w.setzeSpieler();
            setImage("Joppa_links.png");
+           Leben = 100;
+           Luft = 100;
         }
     }
     
@@ -211,13 +212,13 @@ public class Joppa extends Actor
         {
             if(l==null)
             {
-                setLocation(getX()-1,getY());
+                setLocation(getX()-4,getY());
             }
             if(l!=null)
             {
                 if(l.durchlässig()==true)
                 {
-                    setLocation(getX()-1,getY());
+                    setLocation(getX()-4,getY());
                 }
             }
             left = true;
@@ -228,13 +229,13 @@ public class Joppa extends Actor
         {
             if(r==null)
             {
-                setLocation(getX()+1,getY());
+                setLocation(getX()+4,getY());
             }
             if(r!=null)
             {
                 if(r.durchlässig()==true)
                 {
-                    setLocation(getX()+1,getY());
+                    setLocation(getX()+4,getY());
                 }
             }
             left = false;
@@ -245,7 +246,7 @@ public class Joppa extends Actor
         {
             if(o!=null && o.gravitation()==false && p!=null && p.gravitation==false)
             {
-                setLocation(getX(),getY()-1);
+                setLocation(getX(),getY()-4);
             }
         }
         
@@ -253,7 +254,7 @@ public class Joppa extends Actor
         {
             if(u!=null && u.durchlässig()==true)
             {
-                setLocation(getX(),getY()+1);
+                setLocation(getX(),getY()+4);
             }
         }
         
@@ -275,7 +276,7 @@ public class Joppa extends Actor
         {
             if(getOneObjectAtOffset(0,1,Wand.class)!=null && getOneObjectAtOffset(0,0,Leiter.class)==null || getOneObjectAtOffset(0,1,Leiter.class)!=null)
             {
-                setLocation(getX(),getY()-2);
+                setLocation(getX(),getY()-16);
                 setLocation(getX(),getY());
             }
         }
@@ -284,12 +285,12 @@ public class Joppa extends Actor
         {
             if(getOneObjectAtOffset(0,1,Wand.class)!=null && getOneObjectAtOffset(0,0,Leiter.class)==null || getOneObjectAtOffset(0,1,Leiter.class)!=null)
             {
-                setLocation(getX(),getY()-2);
+                setLocation(getX(),getY()-8);
                 setLocation(getX(),getY());
             }
             if(getOneObjectAtOffset(0,0,Wasser.class)!=null && (getOneObjectAtOffset(1,0,Wand.class)!=null || getOneObjectAtOffset(-1,0,Wand.class)!=null))
             {
-                setLocation(getX(),getY()-2);
+                setLocation(getX(),getY()-8);
                 setLocation(getX(),getY());
             }
         }
@@ -302,7 +303,7 @@ public class Joppa extends Actor
     {
         if(getOneObjectAtOffset(0,1,Wand.class)==null && getOneObjectAtOffset(0,1,Leiter.class)==null && getOneObjectAtOffset(0,0,Wasser.class)==null)
         {
-            setLocation(getX(),getY()+1);
+            setLocation(getX(),getY()+4);
             Fallhöhe++;
             if(getOneObjectAtOffset(0,1,Wand.class)!=null || getOneObjectAtOffset(0,1,Leiter.class)!=null)
             {
