@@ -202,11 +202,28 @@ public class Joppa extends Actor
      */
     public void bewegen()
     {
-        Block o = (Block)getOneObjectAtOffset(0,-1,Block.class);
-        Block u = (Block)getOneObjectAtOffset(0,1,Block.class);
-        Block r = (Block)getOneObjectAtOffset(1,0,Block.class);
-        Block l = (Block)getOneObjectAtOffset(-1,0,Block.class);
-        Block p = (Block)getOneObjectAtOffset(0,0,Block.class);
+        Block p = (Block)getOneIntersectingObject(Block.class);
+        Block l = null;
+        Block r = null;
+        Block o = null;
+        Block u = null;
+        
+        if(p!=null && p.getX()<=getX())
+        {
+            l = p;
+        }
+        if(p!=null && p.getX()>=getX())
+        {
+            r = p;
+        }
+        if(p!=null && p.getY()<=getY())
+        {
+            o = p;
+        }
+        if(p!=null && p.getY()>=getY())
+        {
+            u = p;
+        }
         
         if(Greenfoot.isKeyDown("left"))
         {
@@ -285,12 +302,12 @@ public class Joppa extends Actor
         {
             if(getOneObjectAtOffset(0,1,Wand.class)!=null && getOneObjectAtOffset(0,0,Leiter.class)==null || getOneObjectAtOffset(0,1,Leiter.class)!=null)
             {
-                setLocation(getX(),getY()-8);
+                setLocation(getX(),getY()-32);
                 setLocation(getX(),getY());
             }
             if(getOneObjectAtOffset(0,0,Wasser.class)!=null && (getOneObjectAtOffset(1,0,Wand.class)!=null || getOneObjectAtOffset(-1,0,Wand.class)!=null))
             {
-                setLocation(getX(),getY()-8);
+                setLocation(getX(),getY()-32);
                 setLocation(getX(),getY());
             }
         }
@@ -301,17 +318,28 @@ public class Joppa extends Actor
      */
     public void fallen()
     {
-        if(getOneObjectAtOffset(0,1,Wand.class)==null && getOneObjectAtOffset(0,1,Leiter.class)==null && getOneObjectAtOffset(0,0,Wasser.class)==null)
+        Block u = null; 
+        Block p = null;
+        
+        for(int i=0; i<getIntersectingObjects(Block.class).size() ; i++)
         {
-            setLocation(getX(),getY()+4);
-            Fallhöhe++;
-            if(getOneObjectAtOffset(0,1,Wand.class)!=null || getOneObjectAtOffset(0,1,Leiter.class)!=null)
+            p = (Block)getIntersectingObjects(Block.class).get(i);
+            if((p instanceof Leiter || p instanceof Wand || p instanceof Wasser )&& p.getY()>getY())
             {
-                if(Fallhöhe>=4)
+                u = p;
+            }
+            if(u==null)
+            {
+                setLocation(getX(),getY()+16);
+                Fallhöhe++;
+                if(u!=null)
                 {
-                    Leben= Leben-2*((Fallhöhe*175/104)-(Fallhöhe*Fallhöhe*7/208)-(5/26));
+                    if(Fallhöhe>=4)
+                    {
+                        Leben= Leben-2*((Fallhöhe*175/104)-(Fallhöhe*Fallhöhe*7/208)-(5/26));
+                    }
+                    Fallhöhe=0;
                 }
-                Fallhöhe=0;
             }
         }
     }
