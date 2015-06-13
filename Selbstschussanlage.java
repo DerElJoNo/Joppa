@@ -9,16 +9,17 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Selbstschussanlage extends Block
 {
     public int Munition=6;
+
     /**
      * Act - do whatever the Selbstschussanlage wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act() 
     {
-        Actor a = (Actor)getObjectsInRange(30,Joppa.class).get(0);
+        Actor a = (Actor)getObjectsInRange(800,Joppa.class).get(0);
         int x = a.getX();
         int y = a.getY();
-        if(getX() <= x+7 && getX() >= x-7 && getY() <= y+7 && getY() >= y-7)
+        if(getX() <= x+130 || getX() >= x-130 || getY() <= y+130 || getY() >= y-130)
         {
             zielen();
             schießen();
@@ -42,8 +43,8 @@ public class Selbstschussanlage extends Block
      * 
      */
     public void zielen()
-    {        
-        Actor a = (Actor)getObjectsInRange(30,Joppa.class).get(0);
+    {
+        Actor a = (Actor)getObjectsInRange(800,Joppa.class).get(0);
         int x = a.getX();
         int y = a.getY();
         turnTowards(x,y);
@@ -56,13 +57,14 @@ public class Selbstschussanlage extends Block
     {
         if( Munition>= 0)
         {
-            Actor a = (Actor)getObjectsInRange(30,Joppa.class).get(0);
+            Actor a = (Actor)getObjectsInRange(800,Joppa.class).get(0);
             int x = a.getX();
             int y = a.getY();
             int Rotation = getRotation();
             Munition b = new Munition(x,y,getX(),getY(),Rotation);
             getWorld().addObject(b,getX(),getY());
             Munition--;
+            Greenfoot.delay(1);
         }
     }
 }
