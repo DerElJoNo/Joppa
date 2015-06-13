@@ -49,16 +49,17 @@ public class Joppa extends Actor
      */
     public void essen()
     {
-        if(getOneObjectAtOffset(0,0,Item.class)!=null && Greenfoot.isKeyDown("q"))
+        if(getOneIntersectingObject(Item.class)!=null && Greenfoot.isKeyDown("q"))
         {
-            Item i = (Item)getOneObjectAtOffset(0,0,Item.class);
-            
+            Item i = (Item)getOneIntersectingObject(Item.class);
             if( i instanceof Essbar ){
                 Essbar essen = (Essbar) i;
-            
-                if( 100 >= essen.getHungerpunkte() + Leben) {
+                if( 100 >= essen.getHungerpunkte() + Leben) 
+                {
                     Leben = Leben + essen.getHungerpunkte();
-                } else {
+                }
+                else
+                {
                     Leben = 100;
                 }
                 getWorld().removeObject(i);
@@ -96,9 +97,9 @@ public class Joppa extends Actor
      */
     public void aufsammeln()
     {
-        if(getOneObjectAtOffset(0,0,Item.class)!=null && Greenfoot.isKeyDown("e") && inv.voll()==false)
+        if(getOneIntersectingObject(Item.class)!=null && Greenfoot.isKeyDown("e") && inv.voll()==false)
         {
-            Item i = (Item)getOneObjectAtOffset(0,0,Item.class);
+            Item i = (Item)getOneIntersectingObject(Item.class);
             inv.einfügen(i);
             getWorld().removeObject(i);
         }
@@ -112,11 +113,12 @@ public class Joppa extends Actor
         if ( Greenfoot.isKeyDown("o") )
         {
             Tür tür;
-            if(getOneObjectAtOffset(-1, 0, Tür.class) != null) {
-                tür = (Tür) getOneObjectAtOffset(-1, 0, Tür.class);
-            } else if (getOneObjectAtOffset(1, 0, Tür.class) != null) {
-                tür = (Tür) getOneObjectAtOffset(1, 0, Tür.class);
-            } else {
+            if(getOneIntersectingObject(Tür.class) != null) 
+            {
+                tür = (Tür) getOneIntersectingObject(Tür.class);
+            }
+            else 
+            {
                 return;
             }
             
@@ -164,7 +166,7 @@ public class Joppa extends Actor
      */
     public void getroffenWerden()
     {
-        if(getOneObjectAtOffset(0,0,Munition.class)!=null)
+        if(getOneIntersectingObject(Munition.class)!=null)
         {
             Leben=Leben-5;
         }
@@ -175,7 +177,7 @@ public class Joppa extends Actor
      */
     public void verbrennen()
     {
-        if(getOneObjectAtOffset(0,0,Feuer.class)!=null)
+        if(getOneIntersectingObject(Feuer.class)!=null)
         {
             Leben= Leben-20;
         }
@@ -229,13 +231,13 @@ public class Joppa extends Actor
         {
             if(l==null)
             {
-                setLocation(getX()-4,getY());
+                setLocation(getX()-8,getY());
             }
             if(l!=null)
             {
                 if(l.durchlässig()==true)
                 {
-                    setLocation(getX()-4,getY());
+                    setLocation(getX()-8,getY());
                 }
             }
             left = true;
@@ -246,13 +248,13 @@ public class Joppa extends Actor
         {
             if(r==null)
             {
-                setLocation(getX()+4,getY());
+                setLocation(getX()+8,getY());
             }
             if(r!=null)
             {
                 if(r.durchlässig()==true)
                 {
-                    setLocation(getX()+4,getY());
+                    setLocation(getX()+8,getY());
                 }
             }
             left = false;
@@ -263,7 +265,7 @@ public class Joppa extends Actor
         {
             if(o!=null && o.gravitation()==false && p!=null && p.gravitation==false)
             {
-                setLocation(getX(),getY()-4);
+                setLocation(getX(),getY()-8);
             }
         }
         
@@ -271,11 +273,11 @@ public class Joppa extends Actor
         {
             if(u!=null && u.durchlässig()==true)
             {
-                setLocation(getX(),getY()+4);
+                setLocation(getX(),getY()+8);
             }
         }
         
-        if(getOneObjectAtOffset(0,-1,Wasser.class)!=null && getOneObjectAtOffset(0,0,Wasser.class)!=null)
+        if(o instanceof Wasser)
         {
             Luft=Luft-2;
             if(Luft <= 1)
@@ -289,23 +291,14 @@ public class Joppa extends Actor
             Luft=100;
         }
         
-        if(getOneObjectAtOffset(0,-1,Wand.class)==null && Greenfoot.isKeyDown("space"))
+        if(o==null && Greenfoot.isKeyDown("space"))
         {
-            if(getOneObjectAtOffset(0,1,Wand.class)!=null && getOneObjectAtOffset(0,0,Leiter.class)==null || getOneObjectAtOffset(0,1,Leiter.class)!=null)
-            {
-                setLocation(getX(),getY()-16);
-                setLocation(getX(),getY());
-            }
-        }
-        
-        if(getOneObjectAtOffset(0,-1,Wand.class)==null && Greenfoot.isKeyDown("space"))
-        {
-            if(getOneObjectAtOffset(0,1,Wand.class)!=null && getOneObjectAtOffset(0,0,Leiter.class)==null || getOneObjectAtOffset(0,1,Leiter.class)!=null)
+            if(u instanceof Wand || u instanceof Leiter)
             {
                 setLocation(getX(),getY()-32);
                 setLocation(getX(),getY());
             }
-            if(getOneObjectAtOffset(0,0,Wasser.class)!=null && (getOneObjectAtOffset(1,0,Wand.class)!=null || getOneObjectAtOffset(-1,0,Wand.class)!=null))
+            if(getOneIntersectingObject(Wasser.class)!=null && (l!=null || r!=null))
             {
                 setLocation(getX(),getY()-32);
                 setLocation(getX(),getY());
@@ -324,7 +317,7 @@ public class Joppa extends Actor
         for(int i=0; i<getIntersectingObjects(Block.class).size() ; i++)
         {
             p = (Block)getIntersectingObjects(Block.class).get(i);
-            if((p instanceof Leiter || p instanceof Wand || p instanceof Wasser )&& p.getY()>getY())
+            if(p.getY()>getY() &&(p instanceof Wand || p instanceof Leiter || p instanceof Wasser ))
             {
                 u = p;
             }
