@@ -110,7 +110,7 @@ public class Joppa extends Actor
      */
     public void öffnen()
     {
-        if ( Greenfoot.isKeyDown("o") )
+        if (Greenfoot.isKeyDown("o"))
         {
             Tür tür;
             if(getOneIntersectingObject(Tür.class) != null) 
@@ -205,27 +205,10 @@ public class Joppa extends Actor
     public void bewegen()
     {
         Block p = (Block)getOneIntersectingObject(Block.class);
-        Block l = null;
-        Block r = null;
-        Block o = null;
-        Block u = null;
-        
-        if(p!=null && p.getX()<=getX())
-        {
-            l = p;
-        }
-        if(p!=null && p.getX()>=getX())
-        {
-            r = p;
-        }
-        if(p!=null && p.getY()<=getY())
-        {
-            o = p;
-        }
-        if(p!=null && p.getY()>=getY())
-        {
-            u = p;
-        }
+        Block l = (Block)getOneTouchingObject("l", Block.class);
+        Block r = (Block)getOneTouchingObject("r", Block.class);
+        Block o = (Block)getOneTouchingObject("o", Block.class);
+        Block u = (Block)getOneTouchingObject("u", Block.class);
         
         if(Greenfoot.isKeyDown("left"))
         {
@@ -286,7 +269,7 @@ public class Joppa extends Actor
             }
         }
         
-        if(getOneObjectAtOffset(0,-1,Wasser.class)==null)
+        if(getOneTouchingObject("o",Wasser.class)==null)
         {
             Luft=100;
         }
@@ -313,27 +296,87 @@ public class Joppa extends Actor
     {
         Block u = null; 
         Block p = null;
-        
-        for(int i=0; i<getIntersectingObjects(Block.class).size() ; i++)
+        if(getOneTouchingObject("u",Block.class)==null)
         {
-            p = (Block)getIntersectingObjects(Block.class).get(i);
-            if(p.getY()>getY() &&(p instanceof Wand || p instanceof Leiter || p instanceof Wasser ))
+            setLocation(getX(),getY()+16);
+            Fallhöhe++;
+            if(u!=null)
             {
-                u = p;
-            }
-            if(u==null)
-            {
-                setLocation(getX(),getY()+16);
-                Fallhöhe++;
-                if(u!=null)
+                if(Fallhöhe>=4)
                 {
-                    if(Fallhöhe>=4)
+                   Leben= Leben-2*((Fallhöhe*175/104)-(Fallhöhe*Fallhöhe*7/208)-(5/26));
+                }
+                Fallhöhe=0;
+            }        
+        }
+        if(getOneTouchingObject("u",Block.class)!=null)
+        {
+            for(int i=1; i<=getIntersectingObjects(Block.class).size() ; i++)
+            {
+                p = (Block)getIntersectingObjects(Block.class).get(i-1);
+                if(p!=null)
+                {
+                    if(p.getY()>getY() &&(p instanceof Wand || p instanceof Leiter || p instanceof Wasser ))
                     {
-                        Leben= Leben-2*((Fallhöhe*175/104)-(Fallhöhe*Fallhöhe*7/208)-(5/26));
+                        u = p;
                     }
-                    Fallhöhe=0;
+                }
+                if(u==null)
+                {
+                    setLocation(getX(),getY()+16);
+                    Fallhöhe++;
+                    if(u!=null)
+                    {
+                        if(Fallhöhe>=4)
+                        {
+                            Leben= Leben-2*((Fallhöhe*175/104)-(Fallhöhe*Fallhöhe*7/208)-(5/26));
+                        }
+                        Fallhöhe=0;
+                    }
                 }
             }
         }
+    }
+    
+    public Actor getOneTouchingObject(String x, Class b)
+    {
+        Actor a = null;
+        if(x == "u")
+        {
+            setLocation(getX(),getY()+1);
+            if(getOneIntersectingObject(b)!=null && getOneIntersectingObject(b).getY()>getY())
+            {
+                a = getOneIntersectingObject(b);
+            }
+            setLocation(getX(),getY()-1);
+        }
+        if(x == "l")
+        {
+            setLocation(getX()-1,getY());
+            if(getOneIntersectingObject(b)!=null && getOneIntersectingObject(b).getX()<getX())
+            {
+                a = getOneIntersectingObject(b);
+            }
+            setLocation(getX()+1,getY());
+        }
+        if(x == "o")
+        {
+            setLocation(getX(),getY()-1);
+            if(getOneIntersectingObject(b)!=null && getOneIntersectingObject(b).getY()<getY())
+            {
+                a = getOneIntersectingObject(b);
+            }
+            setLocation(getX(),getY()+1);
+        }
+        if(x == "r")
+        {
+            setLocation(getX()+1,getY());
+            if(getOneIntersectingObject(b)!=null && getOneIntersectingObject(b).getX()>getX())
+            {
+                a = getOneIntersectingObject(b);
+            }
+            setLocation(getX()-1,getY()); 
+        }
+        return a;
     }
 }
