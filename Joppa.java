@@ -213,14 +213,22 @@ public class Joppa extends Actor
         
         if(Greenfoot.isKeyDown("left"))
         {
-            setLocation(getX()-checkedV("l"),getY());
+            setLocation(getX()-V,getY());
+            if(l!=null && l.durchlässig()==false)
+            {
+                setLocation(getX()+V,getY());
+            }
             left = true;
             setImage("Joppa_links.png");
         }
         
         if(Greenfoot.isKeyDown("right"))
         {
-            setLocation(getX()+checkedV("r"),getY());
+            setLocation(getX()+V,getY());
+            if(r!=null && r.durchlässig()==false)
+            {
+                setLocation(getX()-V,getY());
+            }
             left = false;
             setImage("Joppa_rechts.png");
         }
@@ -229,7 +237,7 @@ public class Joppa extends Actor
         {
             if(o!=null && o.gravitation()==false && p!=null && p.gravitation==false)
             {
-                setLocation(getX(),getY()-checkedV("o"));
+                setLocation(getX(),getY()-V);
             }
         }
         
@@ -237,7 +245,7 @@ public class Joppa extends Actor
         {
             if(u!=null && u.durchlässig()==true)
             {
-                setLocation(getX(),getY()+checkedV("u"));
+                setLocation(getX(),getY()+V);
             }
         }
         
@@ -330,38 +338,5 @@ public class Joppa extends Actor
         setLocation(getX()-XChange,getY()-YChange);
         
         return a;
-    }
-    
-    public int checkedV(String direction)
-    {
-        for(int i = V; i == 0; i--)
-        {
-            int XChange = 0;
-            int YChange = 0;
-            if(direction == "u")
-            {
-                YChange = i;
-            }
-            if(direction == "l")
-            {
-                XChange = -i;
-            }
-            if(direction == "o")
-            {
-                YChange = -i;
-            }
-            if(direction == "r")
-            {
-                XChange = i;
-            }
-            
-            setLocation(getX() + XChange, getY() + YChange);
-            
-            if(getOneTouchingObject(direction, Block.class) == null)
-            {
-                return i;
-            }
-        }
-        return V;
     }
 }
