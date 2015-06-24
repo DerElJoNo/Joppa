@@ -16,6 +16,7 @@ public class Joppa extends Actor
     public Inventar inv;
     public GreenfootImage joppa;
     public boolean left;
+    private final int V = 8;
     
     public Joppa()
     {
@@ -212,10 +213,10 @@ public class Joppa extends Actor
         
         if(Greenfoot.isKeyDown("left"))
         {
-            setLocation(getX()-8,getY());
+            setLocation(getX()-V,getY());
             if(l!=null && l.durchlässig()==false)
             {
-                setLocation(getX()+8,getY());
+                setLocation(getX()+V,getY());
             }
             left = true;
             setImage("Joppa_links.png");
@@ -223,10 +224,10 @@ public class Joppa extends Actor
         
         if(Greenfoot.isKeyDown("right"))
         {
-            setLocation(getX()+8,getY());
+            setLocation(getX()+V,getY());
             if(r!=null && r.durchlässig()==false)
             {
-                setLocation(getX()-8,getY());
+                setLocation(getX()-V,getY());
             }
             left = false;
             setImage("Joppa_rechts.png");
@@ -236,7 +237,7 @@ public class Joppa extends Actor
         {
             if(o!=null && o.gravitation()==false && p!=null && p.gravitation==false)
             {
-                setLocation(getX(),getY()-8);
+                setLocation(getX(),getY()-V);
             }
         }
         
@@ -244,7 +245,7 @@ public class Joppa extends Actor
         {
             if(u!=null && u.durchlässig()==true)
             {
-                setLocation(getX(),getY()+8);
+                setLocation(getX(),getY()+V);
             }
         }
         
@@ -266,12 +267,12 @@ public class Joppa extends Actor
         {
             if(u instanceof Wand || u instanceof Leiter)
             {
-                setLocation(getX(),getY()-32);
+                setLocation(getX(),getY()-4*V);
                 setLocation(getX(),getY());
             }
             if(getOneIntersectingObject(Wasser.class)!=null && (l!=null || r!=null))
             {
-                setLocation(getX(),getY()-32);
+                setLocation(getX(),getY()-4*V);
                 setLocation(getX(),getY());
             }
         }
@@ -286,7 +287,7 @@ public class Joppa extends Actor
         if(getOneTouchingObject("u",Wand.class)==null && getOneTouchingObject("u",Leiter.class)==null && getOneTouchingObject("u",Wasser.class)==null)
         {
             Fallhöhe++;
-            setLocation(getX(),getY()+16);
+            setLocation(getX(),getY()+2*V);
             u = (Block)getOneTouchingObject("u",Block.class);
             if(u!=null)
             {
