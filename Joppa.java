@@ -303,42 +303,40 @@ public class Joppa extends Actor
     public Actor getOneTouchingObject(String x, Class b)
     {
         Actor a = null;
-        if(x == "u")
-        {
-            setLocation(getX(),getY()+1);
-            if(getOneIntersectingObject(b)!=null && getOneIntersectingObject(b).getY()>getY())
-            {
-                a = getOneIntersectingObject(b);
-            }
-            setLocation(getX(),getY()-1);
+        int XChange = 0;
+        int YChange = 0;
+        if(x == "u") {
+            YChange = V;
+        } else if(x == "l") {
+            XChange = -V;
+        } else if(x == "o") {
+            YChange = -V;
+        } else if(x == "r") {
+            XChange = V;
         }
-        if(x == "l")
+        
+        setLocation(getX() + XChange, getY() + YChange);
+        Actor iActor = getOneIntersectingObject(b);
+        if(iActor!=null)
         {
-            setLocation(getX()-1,getY());
-            if(getOneIntersectingObject(b)!=null && getOneIntersectingObject(b).getX()<getX())
-            {
-                a = getOneIntersectingObject(b);
+            boolean correctDirection = false;
+            
+            if(x == "u") {
+                correctDirection = iActor.getY() > getY();
+            } else if(x == "l") {
+                correctDirection = iActor.getX() < getX();
+            } else if(x == "o") {
+                correctDirection = iActor.getY() < getY();
+            } else if(x == "r") {
+                correctDirection = iActor.getX() > getX();
             }
-            setLocation(getX()+1,getY());
-        }
-        if(x == "o")
-        {
-            setLocation(getX(),getY()-1);
-            if(getOneIntersectingObject(b)!=null && getOneIntersectingObject(b).getY()<getY())
-            {
-                a = getOneIntersectingObject(b);
+            
+            if(correctDirection) {
+                a = iActor;
             }
-            setLocation(getX(),getY()+1);
         }
-        if(x == "r")
-        {
-            setLocation(getX()+1,getY());
-            if(getOneIntersectingObject(b)!=null && getOneIntersectingObject(b).getX()>getX())
-            {
-                a = getOneIntersectingObject(b);
-            }
-            setLocation(getX()-1,getY()); 
-        }
+        setLocation(getX()-XChange,getY()-YChange);
+        
         return a;
     }
 }
