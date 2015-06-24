@@ -206,10 +206,10 @@ public class Joppa extends Actor
     public void bewegen()
     {
         Block p = (Block)getOneIntersectingObject(Block.class);
-        Block l = (Block)getOneTouchingObject("l", Block.class);
-        Block r = (Block)getOneTouchingObject("r", Block.class);
-        Block o = (Block)getOneTouchingObject("o", Block.class);
-        Block u = (Block)getOneTouchingObject("u", Block.class);
+        Block l = (Block)getOneTouchingObject("l", Block.class, V);
+        Block r = (Block)getOneTouchingObject("r", Block.class, V);
+        Block o = (Block)getOneTouchingObject("o", Block.class, V);
+        Block u = (Block)getOneTouchingObject("u", Block.class, V);
         
         if(Greenfoot.isKeyDown("left"))
         {
@@ -258,7 +258,7 @@ public class Joppa extends Actor
             }
         }
         
-        if(getOneTouchingObject("o",Wasser.class)==null)
+        if(getOneTouchingObject("o",Wasser.class, V)==null)
         {
             Luft=100;
         }
@@ -284,11 +284,11 @@ public class Joppa extends Actor
     public void fallen()
     {
         Block u = null;
-        if(getOneTouchingObject("u",Wand.class)==null && getOneTouchingObject("u",Leiter.class)==null && getOneTouchingObject("u",Wasser.class)==null)
+        if(getOneTouchingObject("u",Wand.class, V)==null && getOneTouchingObject("u",Leiter.class, V)==null && getOneTouchingObject("u",Wasser.class, V)==null)
         {
             Fallhöhe++;
             setLocation(getX(),getY()+2*V);
-            u = (Block)getOneTouchingObject("u",Block.class);
+            u = (Block)getOneTouchingObject("u",Block.class, V);
             if(u!=null)
             {
                 if(Fallhöhe>=4)
@@ -300,19 +300,19 @@ public class Joppa extends Actor
         }
     }
     
-    public Actor getOneTouchingObject(String x, Class b)
+    public Actor getOneTouchingObject(String x, Class b, int offset)
     {
         Actor a = null;
         int XChange = 0;
         int YChange = 0;
         if(x == "u") {
-            YChange = V;
+            YChange = offset;
         } else if(x == "l") {
-            XChange = -V;
+            XChange = -offset;
         } else if(x == "o") {
-            YChange = -V;
+            YChange = -offset;
         } else if(x == "r") {
-            XChange = V;
+            XChange = offset;
         }
         
         setLocation(getX() + XChange, getY() + YChange);
