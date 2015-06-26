@@ -206,17 +206,18 @@ public class Joppa extends Actor
     public void bewegen()
     {
         Block p = (Block)getOneIntersectingObject(Block.class);
-        Block l = (Block)getOneTouchingObject("l", Block.class, V);
-        Block r = (Block)getOneTouchingObject("r", Block.class, V);
-        Block o = (Block)getOneTouchingObject("o", Block.class, V);
-        Block u = (Block)getOneTouchingObject("u", Block.class, V);
+        
         
         if(Greenfoot.isKeyDown("left"))
         {
-            setLocation(getX()-V,getY());
-            if(l!=null && l.durchlässig()==false)
+            for(int i=V; i>0; i--)
             {
-                setLocation(getX()+V,getY());
+                Block l = (Block)getOneTouchingObject("l", Block.class, i);
+                if(l==null || l.durchlässig()==true)
+                {
+                    setLocation(getX()-i,getY());
+                    break;
+                }
             }
             left = true;
             setImage("Joppa_links.png");
@@ -224,10 +225,14 @@ public class Joppa extends Actor
         
         if(Greenfoot.isKeyDown("right"))
         {
-            setLocation(getX()+V,getY());
-            if(r!=null && r.durchlässig()==false)
+            for(int i=V; i>0; i--)
             {
-                setLocation(getX()-V,getY());
+                Block r = (Block)getOneTouchingObject("r", Block.class, i);
+                if(r==null || r.durchlässig()==true)
+                {
+                    setLocation(getX()+i,getY());
+                    break;
+                }
             }
             left = false;
             setImage("Joppa_rechts.png");
@@ -235,21 +240,31 @@ public class Joppa extends Actor
         
         if(Greenfoot.isKeyDown("up"))
         {
-            if(o!=null && o.gravitation()==false && p!=null && p.gravitation==false)
+            for(int i=V; i>0; i--)
             {
-                setLocation(getX(),getY()-V);
+                Block o = (Block)getOneTouchingObject("o", Block.class, i);
+                if(o!=null && o.gravitation()==false && p!=null && p.gravitation==false)
+                {
+                    setLocation(getX(),getY()-V);
+                    break;
+                }
             }
         }
         
         if(Greenfoot.isKeyDown("down"))
         {
-            if(u!=null && u.durchlässig()==true)
+            for(int i=V; i>0; i--)
             {
-                setLocation(getX(),getY()+V);
+                Block u = (Block)getOneTouchingObject("u", Block.class, i);
+                if(u!=null && u.durchlässig()==true)
+                {
+                    setLocation(getX(),getY()+V);
+                    break;
+                }
             }
         }
         
-        if(o instanceof Wasser)
+        if((Block)getOneTouchingObject("o", Block.class, V) instanceof Wasser)
         {
             Luft=Luft-2;
             if(Luft <= 1)
@@ -263,8 +278,11 @@ public class Joppa extends Actor
             Luft=100;
         }
         
-        if(o==null && Greenfoot.isKeyDown("space"))
+        if((Block)getOneTouchingObject("o", Block.class, V)==null && Greenfoot.isKeyDown("space"))
         {
+            Block l = (Block)getOneTouchingObject("l", Block.class, V);
+            Block r = (Block)getOneTouchingObject("r", Block.class, V);
+            Block u = (Block)getOneTouchingObject("u", Block.class, V);
             if(u instanceof Wand || u instanceof Leiter)
             {
                 setLocation(getX(),getY()-4*V);
@@ -283,19 +301,27 @@ public class Joppa extends Actor
      */
     public void fallen()
     {
-        Block u = null;
-        if(getOneTouchingObject("u",Wand.class, V)==null && getOneTouchingObject("u",Leiter.class, V)==null && getOneTouchingObject("u",Wasser.class, V)==null)
+        if(getOneTouchingObject("u",Wand.class, 1)==null && getOneTouchingObject("u",Leiter.class, 1)==null && getOneTouchingObject("u",Wasser.class, 1)==null)
         {
             Fallhöhe++;
-            setLocation(getX(),getY()+2*V);
-            u = (Block)getOneTouchingObject("u",Block.class, V);
-            if(u!=null)
+            for(int i = 2*V; i>0; i--)
             {
-                if(Fallhöhe>=4)
+                Block u = (Block)getOneTouchingObject("u",Block.class, i);
+                if(u instanceof Wand || u instanceof Leiter || u instanceof Wasser)
                 {
-                   Leben= Leben-2*((Fallhöhe*175/104)-(Fallhöhe*Fallhöhe*7/208)-(5/26));
+                    if(Fallhöhe>=4)
+                    {
+                        Leben= Leben-2*((Fallhöhe*175/104)-(Fallhöhe*Fallhöhe*7/208)-(5/26));
+                    }
+                    Fallhöhe=0;
+                    setLocation(getX(),getY()+i);
+                    break;
                 }
-                Fallhöhe=0;
+                if(!(u instanceof Wand || u instanceof Leiter || u instanceof Wasser))
+                {
+                    setLocation(getX(),getY()+2*V);
+                    break;
+                }
             }
         }
     }
