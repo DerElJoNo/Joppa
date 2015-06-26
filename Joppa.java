@@ -243,9 +243,14 @@ public class Joppa extends Actor
             for(int i=V; i>0; i--)
             {
                 Block o = (Block)getOneTouchingObject("o", Block.class, i);
-                if(o!=null && o.gravitation()==false && p!=null && p.gravitation==false)
+                if(getOneIntersectingObject(Leiter.class)!=null && (o == null || o.durchlässig()==true))
                 {
-                    setLocation(getX(),getY()-V);
+                    setLocation(getX(),getY()-i);
+                    break;
+                }
+                if(getOneIntersectingObject(Wasser.class)!=null && o instanceof Wasser)
+                {
+                    setLocation(getX(),getY()-i);
                     break;
                 }
             }
