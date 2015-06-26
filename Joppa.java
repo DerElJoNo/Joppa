@@ -282,15 +282,15 @@ public class Joppa extends Actor
         {
             Block l = (Block)getOneTouchingObject("l", Block.class, V);
             Block r = (Block)getOneTouchingObject("r", Block.class, V);
-            Block u = (Block)getOneTouchingObject("u", Block.class, V);
+            Block u = (Block)getOneTouchingObject("u", Block.class, 1);
             if(u instanceof Wand || u instanceof Leiter)
             {
-                setLocation(getX(),getY()-4*V);
+                setLocation(getX(),getY()-3*V);
                 setLocation(getX(),getY());
             }
             if(getOneIntersectingObject(Wasser.class)!=null && (l!=null || r!=null))
             {
-                setLocation(getX(),getY()-4*V);
+                setLocation(getX(),getY()-3*V);
                 setLocation(getX(),getY());
             }
         }
@@ -301,28 +301,30 @@ public class Joppa extends Actor
      */
     public void fallen()
     {
-        if(getOneTouchingObject("u",Wand.class, 1)==null && getOneTouchingObject("u",Leiter.class, 1)==null && getOneTouchingObject("u",Wasser.class, 1)==null)
+        for(int i = V; i>0; i--)
         {
-            Fallhöhe++;
-            for(int i = 2*V; i>0; i--)
+            Block u = (Block)getOneTouchingObject("u",Block.class, i);
+            if(u instanceof Wand || u instanceof Leiter || u instanceof Wasser)
             {
-                Block u = (Block)getOneTouchingObject("u",Block.class, i);
-                if(u instanceof Wand || u instanceof Leiter || u instanceof Wasser)
+                int h=i-1;
+                Block b =(Block)getOneTouchingObject("u",Block.class,h);
+                if(!(b instanceof Wand || b instanceof Leiter || b instanceof Wasser))
                 {
                     if(Fallhöhe>=4)
                     {
                         Leben= Leben-2*((Fallhöhe*175/104)-(Fallhöhe*Fallhöhe*7/208)-(5/26));
                     }
                     Fallhöhe=0;
-                    setLocation(getX(),getY()+i);
-                    break;
-                }
-                if(!(u instanceof Wand || u instanceof Leiter || u instanceof Wasser))
-                {
-                    setLocation(getX(),getY()+2*V);
+                    setLocation(getX(),getY()+h);
                     break;
                 }
             }
+            else
+            {
+                setLocation(getX(),getY()+V);
+                Fallhöhe++;
+                break;
+            } 
         }
     }
     
