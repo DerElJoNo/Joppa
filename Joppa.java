@@ -244,7 +244,7 @@ public class Joppa extends Actor
         
         if(Greenfoot.isKeyDown("up"))
         {
-            for(int i=V; i>0; i--)
+            for(int i=2*V; i>0; i--)
             {
                 Block o = (Block)getOneTouchingObject("o", Block.class, i);
                 if(getOneIntersectingObject(Leiter.class)!=null && (o == null || o.durchlässig()==true))
