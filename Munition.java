@@ -8,20 +8,11 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Munition extends Block
 {
-    public double X1;
-    public double Y1;
-    public double X2;
-    public double Y2;
-    public int a;
-    public int b;
     public int R;
+    public final double V=8;
     
-    public Munition(int richtungx1,int richtungy1,int richtungx2, int richtungy2, int Rotation)
+    public Munition(int Rotation)
     {
-        X1= (double) richtungx1;
-        Y1= (double) richtungy1;
-        X2= (double) richtungx2;
-        Y2= (double) richtungy2;
         R= Rotation;
     }
     
@@ -53,6 +44,17 @@ public class Munition extends Block
      */
     public void fliegen()
     {
-        setLocation(getX()+(int)(3*(X1-X2)/(Math.sqrt((X2-X1)*(X2-X1)+(Y2-Y1)*(Y2-Y1)))), getY()+(int)(3*(Y1-Y2)/(Math.sqrt((X2-X1)*(X2-X1)+(Y2-Y1)*(Y2-Y1)))));
+        double direction = Math.toRadians(R);
+        double dx = Math.cos(direction) * V;
+        double dy = Math.sin(direction) * V;
+        setLocation((double)getX() + dx, (double)getY() + dy);
+    }
+    
+    /**
+     * 
+     */
+    public void setLocation(double x, double y) 
+    {
+        setLocation((int) (x + 0.5), (int) (y + 0.5));
     }
 }

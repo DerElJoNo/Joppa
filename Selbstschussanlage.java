@@ -8,7 +8,10 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Selbstschussanlage extends Block
 {
-    public int Munition=6;
+    public int munition;
+    public final int Range=50;
+    public long zeit;
+    public boolean geladen;
 
     /**
      * Act - do whatever the Selbstschussanlage wants to do. This method is called whenever
@@ -16,38 +19,63 @@ public class Selbstschussanlage extends Block
      */
     public void act() 
     {
-        Actor a = (Actor)getObjectsInRange(800,Joppa.class).get(0);
-        int x = a.getX();
-        int y = a.getY();
-        if(getX() <= x+130 || getX() >= x-130 || getY() <= y+130 || getY() >= y-130)
-        {
-            zielen();
-            schießen();
-        }
-        nachladen();
+        eliminateTarget(Joppa.class);
         setUndurchlässig();
-    }   
+    }
     
     /**
      * 
      */
-    public void nachladen()
+    public void eliminateTarget(Class c)
     {
-        if(Munition <= 6)
+        Actor a = (Actor)getObjectsInRange(800,c).get(0);
+        int x = a.getX();
+        int y = a.getY();
+        if(getOneObjectInRange(100,c)!=null)
         {
-            Munition=Munition+1;
+            zielen(a);
+            schießen();
         }
     }
     
     /**
      * 
      */
-    public void zielen()
+    public void nachladen()
     {
-        Actor a = (Actor)getObjectsInRange(800,Joppa.class).get(0);
-        int x = a.getX();
-        int y = a.getY();
-        turnTowards(x,y);
+        if(zeitVergangen()>1000 && munition > 0)
+        {
+            geladen = true;
+            munition--;
+        }
+        if(munition == 0 && zeitVergangen() > 4000)
+        {
+            munition = 6;
+        }
+    }
+    
+    /**
+     * 
+     */
+    public void zeitMessen()
+    {
+        zeit = System.currentTimeMillis();
+    }
+    
+    /**
+     * 
+     */
+    public int zeitVergangen()
+    {
+        return (int) (System.currentTimeMillis() - zeit);
+    }
+    
+    /**
+     * 
+     */
+    public void zielen(Actor a)
+    {
+        turnTowards(a.getX(),a.getY());
     }
     
     /**
@@ -55,16 +83,30 @@ public class Selbstschussanlage extends Block
      */
     public void schießen()
     {
-        if( Munition>= 0)
+        if(geladen == true)
         {
-            Actor a = (Actor)getObjectsInRange(800,Joppa.class).get(0);
-            int x = a.getX();
-            int y = a.getY();
             int Rotation = getRotation();
-            Munition b = new Munition(x,y,getX(),getY(),Rotation);
+            Munition b = new Munition(Rotation);
             getWorld().addObject(b,getX(),getY());
-            Munition--;
-            Greenfoot.delay(1);
+            geladen = false;
         }
+        else
+        {
+            nachladen();
+        }
+        zeit = 0;
+    }
+    
+    /**
+     * 
+     */
+    public Actor getOneObjectInRange(int Range, Class c)
+    {
+        if(getObjectsInRange(Range,c).size()>0)
+        {
+            Actor a =(Actor)getObjectsInRange(Range,c).get(0);
+            return a;
+        }
+        return null;
     }
 }
