@@ -114,9 +114,13 @@ public class Joppa extends Actor
         if (Greenfoot.isKeyDown("o"))
         {
             Tür tür;
-            if(getOneIntersectingObject(Tür.class) != null) 
+            if(getOneTouchingObject("l", Tür.class,4) != null && left==true) 
             {
-                tür = (Tür) getOneIntersectingObject(Tür.class);
+                tür = (Tür) getOneTouchingObject("l", Tür.class,4);
+            }
+            else if(getOneTouchingObject("r", Tür.class,4) != null && left==false) 
+            {
+                tür = (Tür) getOneTouchingObject("r", Tür.class,4);
             }
             else 
             {
