@@ -16,7 +16,7 @@ public class Ziel extends Actor
      */
     public void act() 
     {
-        if(getOneObjectAtOffset(0,0,Joppa.class)!=null && Greenfoot.isKeyDown("o"))
+        if(getOneIntersectingObject(Joppa.class)!=null && Greenfoot.isKeyDown("o"))
         {
             World welt = getWorld();
             Level aktuellesLevel = (Level) welt;

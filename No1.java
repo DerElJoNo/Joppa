@@ -18,5 +18,14 @@ public class No1 extends Level
         setzeStandart();
         setLevel(1);
         setzeSpieler();
+        level1();
+    }
+    
+    public void level1()
+    {
+        for(int a = SIZE + MITTE; a <= getWidth(); a = a+SIZE)
+        {
+            addObject(new Wand(), a, 24*SIZE + MITTE);
+        }
     }
 }
