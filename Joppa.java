@@ -211,7 +211,6 @@ public class Joppa extends Actor
     {
         Block p = (Block)getOneIntersectingObject(Block.class);
         
-        
         if(Greenfoot.isKeyDown("left"))
         {
             for(int i=V; i>0; i--)
@@ -249,7 +248,7 @@ public class Joppa extends Actor
                 Block o = (Block)getOneTouchingObject("o", Block.class, i);
                 if(getOneIntersectingObject(Leiter.class)!=null && (o == null || o.durchlässig()==true))
                 {
-                    setLocation(getX(),getY()-i);
+                    setLocation(getOneIntersectingObject(Leiter.class).getX(),getY()-i);
                     break;
                 }
                 if(getOneIntersectingObject(Wasser.class)!=null && o instanceof Wasser)
@@ -262,7 +261,7 @@ public class Joppa extends Actor
         
         if(Greenfoot.isKeyDown("down"))
         {
-            for(int i=V; i>0; i--)
+            for(int i=2*V; i>0; i--)
             {
                 Block u = (Block)getOneTouchingObject("u", Block.class, i);
                 if(u!=null && u.durchlässig()==true)
@@ -310,6 +309,10 @@ public class Joppa extends Actor
      */
     public void fallen()
     {
+        if(getOneIntersectingObject(Leiter.class)!=null || getOneIntersectingObject(Wasser.class)!=null)
+        {
+            return;
+        }
         for(int i = V; i>0; i--)
         {
             Block u = (Block)getOneTouchingObject("u",Block.class, i);
@@ -319,19 +322,20 @@ public class Joppa extends Actor
                 Block b =(Block)getOneTouchingObject("u",Block.class,h);
                 if(!(b instanceof Wand || b instanceof Leiter || b instanceof Wasser))
                 {
-                    if(Fallhöhe>=4)
+                    Fallhöhe = Fallhöhe + h;
+                    if(Fallhöhe>=6*V)
                     {
-                        Leben= Leben-2*((Fallhöhe*175/104)-(Fallhöhe*Fallhöhe*7/208)-(5/26));
+                        Leben= Leben - (Fallhöhe*Fallhöhe)/150;
                     }
-                    Fallhöhe=0;
                     setLocation(getX(),getY()+h);
+                    Fallhöhe = 0;
                     break;
                 }
             }
             else
             {
                 setLocation(getX(),getY()+V);
-                Fallhöhe++;
+                Fallhöhe = Fallhöhe + V;
                 break;
             } 
         }
