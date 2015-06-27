@@ -25,11 +25,18 @@ public class Wasser extends Block
      */
     public void fließen()
     {
-        if(getOneObjectAtOffset(0,1,Wand.class)== null && getOneObjectAtOffset(0,1,Wasser.class)== null)
+        for(int i=9; i>0; i--)
         {
-            setLocation(getX(),getY()+1);
+            setLocation(getX(), getY()+i);
+            if(getOneIntersectingObject(Wasser.class)!=null || getOneIntersectingObject(Wand.class)!=null)
+            {
+                setLocation(getX(), getY()-i);
+            }
+            else
+            {
+                break;
+            }
         }
-        
     }
     
     /**
@@ -37,9 +44,11 @@ public class Wasser extends Block
      */
     public void changePicture()
     {
-        if(getOneObjectAtOffset(0,-1,Wasser.class)!= null)
+        setLocation(getX(), getY()-8);
+        if(getOneIntersectingObject(Wasser.class)!= null)
         {
             setImage("Wasser(unbegrenzt).gif");
         }
+        setLocation(getX(), getY()+8);
     }
 }
