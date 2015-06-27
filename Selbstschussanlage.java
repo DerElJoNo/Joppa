@@ -43,12 +43,11 @@ public class Selbstschussanlage extends Block
      */
     public void nachladen()
     {
-        if(zeitVergangen()>1000 && munition > 0)
+        if(zeitVergangen()>500 && munition > 0)
         {
             geladen = true;
-            munition--;
         }
-        if(munition == 0 && zeitVergangen() > 4000)
+        if(munition == 0 && zeitVergangen() > 2000)
         {
             munition = 6;
         }
@@ -89,12 +88,13 @@ public class Selbstschussanlage extends Block
             Munition b = new Munition(Rotation);
             getWorld().addObject(b,getX(),getY());
             geladen = false;
+            munition--;
+            zeitMessen();
         }
         else
         {
             nachladen();
         }
-        zeit = 0;
     }
     
     /**
