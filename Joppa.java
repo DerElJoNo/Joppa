@@ -186,7 +186,7 @@ public class Joppa extends Actor
     {
         if(getOneIntersectingObject(Feuer.class)!=null)
         {
-            Leben= Leben-20;
+            Leben= Leben-15;
         }
     }
     
@@ -297,11 +297,13 @@ public class Joppa extends Actor
             {
                 setLocation(getX(),getY()-3*V);
                 setLocation(getX(),getY());
+                Fallhöhe = 0;
             }
             if(getOneIntersectingObject(Wasser.class)!=null && (l!=null || r!=null))
             {
                 setLocation(getX(),getY()-3*V);
                 setLocation(getX(),getY());
+                Fallhöhe = 0;
             }
         }
     }

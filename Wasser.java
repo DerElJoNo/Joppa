@@ -113,5 +113,10 @@ public class Wasser extends Block implements Undurchfallbar
                 v = v - dl;
             }
         }
+        else
+        {
+            getWorld().addObject(new Wasser(v-1), getX(), getY()-1);
+            v = 1;
+        }
     }
 }
