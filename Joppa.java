@@ -174,6 +174,8 @@ public class Joppa extends Actor
         if(getOneIntersectingObject(Munition.class)!=null)
         {
             Leben=Leben-5;
+            Munition m = (Munition)getOneIntersectingObject(Munition.class);
+            getWorld().removeObject(m);
         }
     }
     
@@ -261,12 +263,12 @@ public class Joppa extends Actor
         
         if(Greenfoot.isKeyDown("down"))
         {
-            for(int i=2*V; i>0; i--)
+            for(int i=2*V; i>=0; i--)
             {
-                Block u = (Block)getOneTouchingObject("u", Block.class, i);
+                Block u = (Block)getOneTouchingObject("u", Block.class, i-1);
                 if(u!=null && u.durchlässig()==true)
                 {
-                    setLocation(getX(),getY()+V);
+                    setLocation(getX(),getY()+i);
                     break;
                 }
             }
