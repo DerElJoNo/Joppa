@@ -14,6 +14,54 @@ public class Elektronik extends Block
      */
     public void act() 
     {
-        
+        setLocation(posX, posY);
+    }
+    
+    public int posX;
+    public int posY;
+    public boolean ein;
+    
+    public Elektronik(int x, int y, boolean eingeschaltet)
+    {
+        posX = x;
+        posY = y;
+        ein = eingeschaltet;
+    }
+    
+    public int getX()
+    {
+        return posX;
+    }
+    
+    public int getY()
+    {
+        return posY;
+    }
+    
+    public void umschalten()
+    {
+        if(ein == true)
+        {
+            ein = false;
+        }
+        else
+        {
+            ein = true;
+        }
+    }
+    
+    public void einschalten()
+    {
+        ein = true;
+    }
+    
+    public void ausschalten()
+    {
+        ein = false;
+    }
+    
+    public boolean eingeschaltet()
+    {
+        return ein;
     }
 }
