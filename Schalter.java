@@ -31,7 +31,7 @@ public class Schalter extends Block
             Elektronik e = list.ausgeben(i);
             if(e != null)
             {
-                getWorld().addObject(e, 70, 70);
+                getWorld().addObject(e, e.getX(), e.getY());
             }
         }
     }

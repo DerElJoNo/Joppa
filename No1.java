@@ -33,8 +33,15 @@ public class No1 extends Level
             addObject(new Leiter(), 20*SIZE + MITTE, b);
         }
         
-        SchalterDependList l = new SchalterDependList(1);
-        l.einfügen(new ItemAbsorber(true));
-        addObject(new Schalter(l), 50, 50);
+        SchalterDependList l = new SchalterDependList(5);
+        l.einfügen(new ItemAbsorber(80, 80, true, true));
+        l.einfügen(new ItemAbsorber(90, 90, true, true));
+        l.einfügen(new ItemAbsorber(100, 100, true, true));
+        l.einfügen(new ItemAbsorber(110, 110, true, true));
+        l.einfügen(new ItemAbsorber(120, 120, true, true));
+        for(int i = 0; i < l.größe(); i++)
+        {
+            addObject(new Schalter(l), 50, 50);
+        }
     }
 }
