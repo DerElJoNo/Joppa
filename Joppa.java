@@ -106,6 +106,15 @@ public class Joppa extends Actor
         }
     }
     
+    public void umlegen()
+    {
+        if(getOneIntersectingObject(Schalter.class)!=null)
+        {
+            Schalter s = (Schalter)getOneIntersectingObject(Schalter.class);
+            s.umlegen();
+        }
+    }
+    
     /**
      * 
      */

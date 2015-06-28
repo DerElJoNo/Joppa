@@ -18,6 +18,7 @@ public class Schalter extends Block
     }
 
     SchalterDependList list;
+    public boolean ein;
 
     public Schalter(SchalterDependList dependList)
     {
@@ -33,6 +34,25 @@ public class Schalter extends Block
             {
                 getWorld().addObject(e, e.getX(), e.getY());
             }
+        }
+    }
+
+    public void umlegen()
+    {
+        if(ein == true)
+        {
+            ein = false;
+        }
+        else
+        {
+            ein = true;
+        }
+        
+        for(int i = 0; i < list.größe(); i++)
+        {
+            Elektronik e = list.ausgeben(i);
+            e.umschalten();
+            list.einfügen(e);
         }
     }
 }
