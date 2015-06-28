@@ -31,7 +31,7 @@ public class Selbstschussanlage extends Block implements Undurchfallbar
         Actor a = (Actor)getObjectsInRange(800,c).get(0);
         int x = a.getX();
         int y = a.getY();
-        if(getOneObjectInRange(100,c)!=null)
+        if(getOneObjectInRange(150,c)!=null)
         {
             zielen(a);
             schießen();
