@@ -8,15 +8,17 @@ public class SchalterDependList
         größe = i;
     }
     
-    public void einfügen(Elektronik e)
+    public boolean einfügen(Elektronik e)
     {
         for(int i = 0; i < größe; i++)
         {
             if(dependList[i]==null)
             {
                 dependList[i] = e;
+                return true;
             }
         }
+        return false;
     }
     
     public int größe()
