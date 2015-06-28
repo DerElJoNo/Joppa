@@ -21,8 +21,9 @@ public class ItemAbsorber extends Elektronik
         setzeBild();
     }
     
-    public ItemAbsorber(boolean s)
+    public ItemAbsorber(int x, int y, boolean ein, boolean s)
     {
+        super(x, y, ein);
         senkrecht = s;
     }
     
