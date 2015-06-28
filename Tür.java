@@ -6,7 +6,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Tür extends Block
+public class Tür extends Block implements Undurchfallbar
 {
     public boolean durchlässig = false;
     

@@ -6,7 +6,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Wand extends Block
+public class Wand extends Block implements Undurchfallbar
 {
     /**
      * Act - do whatever the Wand wants to do. This method is called whenever

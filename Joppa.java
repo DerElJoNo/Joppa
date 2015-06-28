@@ -316,11 +316,11 @@ public class Joppa extends Actor
         for(int i = V; i>0; i--)
         {
             Block u = (Block)getOneTouchingObject("u",Block.class, i);
-            if(u instanceof Wand || u instanceof Leiter || u instanceof Wasser)
+            if(u instanceof Undurchfallbar)
             {
                 int h=i-1;
                 Block b =(Block)getOneTouchingObject("u",Block.class,h);
-                if(!(b instanceof Wand || b instanceof Leiter || b instanceof Wasser))
+                if(!(b instanceof Undurchfallbar))
                 {
                     Fallhöhe = Fallhöhe + h;
                     if(Fallhöhe>=6*V)

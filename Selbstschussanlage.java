@@ -6,7 +6,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Selbstschussanlage extends Block
+public class Selbstschussanlage extends Block implements Undurchfallbar
 {
     public int munition;
     public final int Range=50;
