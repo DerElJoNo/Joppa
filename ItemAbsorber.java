@@ -31,11 +31,25 @@ public class ItemAbsorber extends Elektronik
     {
         if(senkrecht == true)
         {
-            setImage("ItemAbsorber(senkrecht).png");
+            if(ein == true)
+            {
+                setImage("ItemAbsorber(senkrecht).png");
+            }
+            else
+            {
+                setImage("ItemAbsorber(senkrecht).aus.png");
+            }
         } 
         else 
         {
-            setImage("ItemAbsorber(waagerecht).png");
+            if(ein == true)
+            {
+                setImage("ItemAbsorber(waagerecht).png");
+            }
+            else
+            {
+                setImage("ItemAbsorber(waagerecht).aus.png");
+            }
         }
     }
     
@@ -46,7 +60,7 @@ public class ItemAbsorber extends Elektronik
     {
         Level w =(Level)getWorld();
         Joppa joppa = w.joppa1();
-        if(getOneIntersectingObject(Joppa.class)!=null)
+        if(getOneIntersectingObject(Joppa.class)!=null && ein == true)
         {
             for(int i = 0; i < joppa.inv.größe();i++)
             {
