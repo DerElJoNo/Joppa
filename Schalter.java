@@ -15,11 +15,25 @@ public class Schalter extends Block
     public void act() 
     {
         setzeDependends();
+        setzeBild();
+        setDurchlässig();
     }
 
     SchalterDependList list;
     public boolean ein;
-
+    
+    public void setzeBild()
+    {
+        if(ein == true)
+        {
+            setImage("Schalter(ein).png");
+        }
+        else
+        {
+            setImage("Schalter(aus).png");
+        }
+    }
+    
     public Schalter(SchalterDependList dependList)
     {
         list = dependList;
@@ -27,18 +41,32 @@ public class Schalter extends Block
 
     public void setzeDependends()
     {
-        for(int i = 0; i < list.größe() ; i++)
+        if(list != null)
         {
-            Elektronik e = list.ausgeben(i);
-            if(e != null)
+            for(int i = 0; i < list.größe() ; i++)
             {
-                getWorld().addObject(e, e.getX(), e.getY());
+                Elektronik e = list.ausgeben(i);
+                if(e != null)
+                {
+                    getWorld().addObject(e, e.getX(), e.getY());
+                }
+                list.einfügen(e);
             }
         }
     }
 
     public void umlegen()
     {
+        if(list != null)
+        {
+            for(int i = 0; i < list.größe(); i++)
+            {
+                Elektronik e = list.ausgeben(i);
+                e.umschalten();
+                list.einfügen(e);
+            }
+        }
+        
         if(ein == true)
         {
             ein = false;
@@ -46,13 +74,6 @@ public class Schalter extends Block
         else
         {
             ein = true;
-        }
-        
-        for(int i = 0; i < list.größe(); i++)
-        {
-            Elektronik e = list.ausgeben(i);
-            e.umschalten();
-            list.einfügen(e);
         }
     }
 }

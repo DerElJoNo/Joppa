@@ -38,11 +38,24 @@ public class Joppa extends Actor
         fallen();
         setzen();
         essen();
+        umlegen();
     }
     
     public Inventar inv()
     {
         return inv;
+    }
+    
+    /**
+     * 
+     */
+    public void umlegen()
+    {
+        if (Greenfoot.isKeyDown("o") && getOneIntersectingObject(Schalter.class) != null)
+        {
+            Schalter s = (Schalter)getOneIntersectingObject(Schalter.class);
+            s.umlegen();
+        }        
     }
     
     /**
@@ -103,15 +116,6 @@ public class Joppa extends Actor
             Item i = (Item)getOneIntersectingObject(Item.class);
             inv.einfügen(i);
             getWorld().removeObject(i);
-        }
-    }
-    
-    public void umlegen()
-    {
-        if(getOneIntersectingObject(Schalter.class)!=null)
-        {
-            Schalter s = (Schalter)getOneIntersectingObject(Schalter.class);
-            s.umlegen();
         }
     }
     
