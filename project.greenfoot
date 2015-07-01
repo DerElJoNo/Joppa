@@ -1,5 +1,5 @@
 #Greenfoot properties
-#Wed Jul 01 09:04:12 CEST 2015
+#Wed Jul 01 10:42:17 CEST 2015
 target24.type=ClassTarget
 target16.name=Schl\u00FCssel
 target13.editor.width=1378
@@ -179,6 +179,7 @@ class.Schl\u00FCssel.superclass=Item
 target18.height=50
 target13.width=80
 dependency18.to=Lebensleiste
+dependency71.to=Audioplayer
 dependency1.from=Joppa
 dependency49.type=UsesDependency
 dependency7.to=Feuer
@@ -476,8 +477,8 @@ dependency29.type=UsesDependency
 target5.height=50
 class.Schl\u00FCssel.image=Schl\u00FCssel.png
 dependency12.to=Wand
-dependency56.type=UsesDependency
 target3.y=670
+dependency56.type=UsesDependency
 target3.x=160
 target19.type=InterfaceTarget
 target13.editor.height=744
@@ -564,8 +565,9 @@ target6.y=190
 target6.x=10
 target12.editor.width=1382
 dependency31.to=Schl\u00FCssel
-package.numDependencies=70
+package.numDependencies=71
 class.MenuPointer.superclass=greenfoot.Actor
+dependency71.type=UsesDependency
 class.Feuer.image=Feuer(links+rechts begrenzt).png
 target16.editor.y=-8
 target16.editor.x=-8
@@ -639,6 +641,7 @@ target30.editor.width=1382
 class.Wand.superclass=Block
 target15.height=50
 target5.name=Essbar
+dependency71.from=T\u00FCr
 target25.y=370
 target25.x=10
 target19.width=110

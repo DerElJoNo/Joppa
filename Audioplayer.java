@@ -49,11 +49,6 @@ public class Audioplayer
             
             backgroundmusic.setVolume(backgroundVolume);
             backgroundmusic.play();
-            
-            if(backgroundmusic.isPlaying() == false)
-            {
-                playBackgroundmusic();
-            }
         }
     }
     
