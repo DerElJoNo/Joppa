@@ -51,7 +51,7 @@ public class Joppa extends Actor
      */
     public void umlegen()
     {
-        if (Greenfoot.isKeyDown("o") && getOneIntersectingObject(Schalter.class) != null)
+        if (Greenfoot.isKeyDown("f") && getOneIntersectingObject(Schalter.class) != null)
         {
             Schalter s = (Schalter)getOneIntersectingObject(Schalter.class);
             s.umlegen();
