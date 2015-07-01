@@ -39,7 +39,10 @@ public class No1 extends Level
         l.einfügen(new ItemAbsorber(100, 100, true, true));
         l.einfügen(new ItemAbsorber(110, 110, true, true));
         l.einfügen(new ItemAbsorber(120, 120, true, true));
-        addObject(new Schalter(l), 50, 50);
-        addObject(new Schalter(l), 100, 100);
+        addObject(new Schalter(l), 30*SIZE, MITTE + 28* SIZE);
+        addObject(new Schalter(l), 35*SIZE, MITTE + 28* SIZE);
+        
+        addObject(new Tür(), 38*SIZE, MITTE + 28* SIZE);
+        addObject(new Schlüssel(), 40*SIZE, MITTE + 28* SIZE);
     }
 }
