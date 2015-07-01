@@ -14,6 +14,8 @@ public class Level extends World
     int y;
     int level;
     Joppa joppa1 = new Joppa();
+    Audioplayer audio = new Audioplayer();
+    
     /**
      * Constructor for objects of class Level.
      * 
@@ -21,6 +23,11 @@ public class Level extends World
     public Level()
     {    
         super(45*SIZE, 30*SIZE, 1);
+    }
+    
+    public Audioplayer getAudioplayer()
+    {
+        return audio;
     }
     
     public int levelType()
@@ -67,6 +74,8 @@ public class Level extends World
         {
             addObject(new Inventarfeld(i), (getWidth()/2) - (joppa1.inv.größe() * SIZE / 2) + (i * SIZE) + MITTE, SIZE + MITTE);
         }
+        
+        audio.playBackgroundmusic();
     }
     
     /**
