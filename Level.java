@@ -15,6 +15,7 @@ public class Level extends World
     int level;
     Joppa joppa1 = new Joppa();
     Audioplayer audio = new Audioplayer();
+    Start start = new Start();
     
     /**
      * Constructor for objects of class Level.
@@ -22,12 +23,50 @@ public class Level extends World
      */
     public Level()
     {    
-        super(45*SIZE, 30*SIZE, 1);
+        super(56*SIZE, 36*SIZE, 1);
     }
     
     public Audioplayer getAudioplayer()
     {
         return audio;
+    }
+    
+    public void newWandRow(int x1, int y1, int x2, int y2)
+    {
+        for(int i = x1; i<=x2; i++)
+        {
+            for(int j = y1; j<=y2; j++)
+            {
+                addObject(new Wand(), unit(i), unit(j));
+            }
+        }
+    }
+    
+    public void newFeuerRow(int x1, int y1, int x2, int y2)
+    {
+        for(int i = x1; i<=x2; i++)
+        {
+            for(int j = y1; j<=y2; j++)
+            {
+                addObject(new Feuer(), unit(i), unit(j));
+            }
+        }
+    }
+    
+    public void newLeiterRow(int x1, int y1, int x2, int y2)
+    {
+        for(int i = x1; i<=x2; i++)
+        {
+            for(int j = y1; j<=y2; j++)
+            {
+                addObject(new Leiter(), unit(i), unit(j));
+            }
+        }
+    }
+    
+    public int unit(int x)
+    {
+        return x*SIZE + MITTE;
     }
     
     public int levelType()
@@ -40,10 +79,11 @@ public class Level extends World
         level = x;
     }
     
-    public void setzeSpieler()
+    public void setzeSpieler(int x, int y)
     {
-        addObject(joppa1, 42 * SIZE + MITTE, 28 * SIZE + MITTE);
-        joppa1.setLocation(42 * SIZE + MITTE, 28 * SIZE + MITTE);
+        addObject(start, x, y);
+        addObject(joppa1, start.getX(), start.getY());
+        joppa1.setLocation(start.getX(), start.getY());
     }
     
     /**
@@ -53,10 +93,10 @@ public class Level extends World
     {
         
         Lebensleiste lebensleiste = new Lebensleiste();
-        addObject(lebensleiste, 5 * SIZE + MITTE, SIZE + MITTE);
+        addObject(lebensleiste, unit(5), unit(1));
         
         Luftleiste luftleiste = new Luftleiste();
-        addObject(luftleiste, getWidth()-(5 * SIZE + MITTE), SIZE + MITTE);
+        addObject(luftleiste, getWidth()-(unit(5)), unit(1));
         
         for(int a= MITTE; a<getWidth(); a = a + SIZE)
         {
@@ -72,10 +112,8 @@ public class Level extends World
         
         for(int i=0; i< joppa1.inv.größe(); i++)
         {
-            addObject(new Inventarfeld(i), (getWidth()/2) - (joppa1.inv.größe() * SIZE / 2) + (i * SIZE) + MITTE, SIZE + MITTE);
+            addObject(new Inventarfeld(i), (getWidth()/2) - (joppa1.inv.größe() * SIZE / 2) + unit(i), unit(1));
         }
-        
-        audio.playBackgroundmusic();
     }
     
     /**
