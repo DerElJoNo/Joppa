@@ -23,15 +23,15 @@ public class Feuer extends Block
      */
     public void ChangePicture()
     {
-        if(getOneObjectAtOffset(1,0,Feuer.class)!=null)
+        if(getOneObjectAtOffset(16,0,Feuer.class)!=null)
         {
             setImage("Feuer(links begrenzt).png");
         }
-        if(getOneObjectAtOffset(-1,0,Feuer.class)!=null)
+        if(getOneObjectAtOffset(-16,0,Feuer.class)!=null)
         {
             setImage("Feuer(rechts begrenzt).png");
         }
-        if(getOneObjectAtOffset(1,0,Feuer.class)!=null && getOneObjectAtOffset(-1,0,Feuer.class)!=null)
+        if(getOneObjectAtOffset(16,0,Feuer.class)!=null && getOneObjectAtOffset(-16,0,Feuer.class)!=null)
         {
             setImage("Feuer(unbegrenzt).png");
         }
