@@ -17,7 +17,8 @@ public class Kuchen extends Item implements Essbar
         setItemBild("Kuchen(Item).png");
     }
     
-    public int getHungerpunkte() {
+    public int getHungerpunkte()
+    {
         return 15;
     }
 }

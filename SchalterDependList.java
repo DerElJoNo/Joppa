@@ -4,8 +4,8 @@ public class SchalterDependList
     public int größe;
     public SchalterDependList(int i)
     {
-        dependList = new Elektronik[i];
         größe = i;
+        dependList = new Elektronik[größe];
     }
     
     public boolean einfügen(Elektronik e)

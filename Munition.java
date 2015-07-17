@@ -33,7 +33,7 @@ public class Munition extends Block
      */
     public void auflösen()
     {
-        if(getOneObjectAtOffset(0,0,Wand.class) != null)
+        if(getOneIntersectingObject(Wand.class) != null)
         {
             getWorld().removeObject(this);
         }
