@@ -67,4 +67,44 @@ public class Block extends Actor
     {
         durchlässig = false;
     }
+    
+    public Actor getOneTouchingObject(String x, Class b, int offset)
+    {
+        Actor a = null;
+        int XChange = 0;
+        int YChange = 0;
+        if(x == "u") {
+            YChange = offset;
+        } else if(x == "l") {
+            XChange = -offset;
+        } else if(x == "o") {
+            YChange = -offset;
+        } else if(x == "r") {
+            XChange = offset;
+        }
+        
+        setLocation(getX() + XChange, getY() + YChange);
+        Actor iActor = getOneIntersectingObject(b);
+        if(iActor!=null)
+        {
+            boolean correctDirection = false;
+            
+            if(x == "u") {
+                correctDirection = iActor.getY() > getY();
+            } else if(x == "l") {
+                correctDirection = iActor.getX() < getX();
+            } else if(x == "o") {
+                correctDirection = iActor.getY() < getY();
+            } else if(x == "r") {
+                correctDirection = iActor.getX() > getX();
+            }
+            
+            if(correctDirection) {
+                a = iActor;
+            }
+        }
+        setLocation(getX()-XChange,getY()-YChange);
+        
+        return a;
+    }
 }
