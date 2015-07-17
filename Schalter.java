@@ -14,8 +14,8 @@ public class Schalter extends Block
      */
     public void act() 
     {
-        setzeDependends();
         setzeBild();
+        setzeDependends();
         setDurchlässig();
     }
 

@@ -213,7 +213,8 @@ public class Joppa extends Actor
         {
            World world = getWorld();
            Level w = (Level)world;
-           w.setzeSpieler();
+           Start start = w.start;
+           w.setzeSpieler(start.getX(), start.getY());
            setImage("Joppa_links.png");
            Leben = 100;
            Luft = 100;
