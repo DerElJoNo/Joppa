@@ -14,35 +14,53 @@ public class No1 extends Level
      * 
      */
     public No1()
-    { 
-        level1();   
+    {
+        no1();    
         setzeStandart();
+        setzeSpieler(unit(51), unit(34));
         setLevel(1);
-        setzeSpieler();
     }
     
-    public void level1()
+    public void no1()
     {
-        for(int a = SIZE + MITTE; a < 20*SIZE + MITTE; a = a+SIZE)
+        addObject(new Ziel(), unit(35), unit(34));
+        addObject(new Wand(), unit(54), unit(28));
+        addObject(new Tür(), unit(47), unit(34));
+        addObject(new Schlüssel(), unit(44), unit(27));
+        
+        for(int a = 34; a>23; a--)
         {
-            addObject(new Wand(), a, 24*SIZE + MITTE);
+            addObject(new Wand(), unit(33), unit(a));
         }
         
-        for(int b = 28*SIZE + MITTE; b >= 24*SIZE + MITTE; b = b-SIZE)
+        for(int b = 33; b<55; b++)
         {
-            addObject(new Leiter(), 20*SIZE + MITTE, b);
+            addObject(new Wand(), unit(b), unit(23));
         }
         
-        SchalterDependList l = new SchalterDependList(5);
-        l.einfügen(new ItemAbsorber(80, 80, true, true));
-        l.einfügen(new ItemAbsorber(90, 90, true, true));
-        l.einfügen(new ItemAbsorber(100, 100, true, true));
-        l.einfügen(new ItemAbsorber(110, 110, true, true));
-        l.einfügen(new ItemAbsorber(120, 120, true, true));
-        addObject(new Schalter(l), 30*SIZE, MITTE + 28* SIZE);
-        addObject(new Schalter(l), 35*SIZE, MITTE + 28* SIZE);
+        for(int c = 34; c<47; c++)
+        {
+            addObject(new Wand(), unit(c), unit(32));
+        }
         
-        addObject(new Tür(), 38*SIZE, MITTE + 28* SIZE);
-        addObject(new Schlüssel(), 40*SIZE, MITTE + 28* SIZE);
+        for(int d = 33; d>28; d--)
+        {
+            addObject(new Wand(), unit(47), unit(d));
+        }
+        
+        for(int e = 40; e<53; e++)
+        {
+            addObject(new Wand(), unit(e), unit(28));
+        }
+        
+        for(int f = 24; f<28; f++)
+        {
+            addObject(new Wand(), unit(40), unit(f));
+        }
+        
+        for(int g = 34; g>27; g--)
+        {
+            addObject(new Leiter(), unit(53), unit(g));
+        }
     }
 }
