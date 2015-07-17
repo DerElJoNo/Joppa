@@ -27,7 +27,6 @@ public class Tür extends Block implements Undurchfallbar
         setDurchlässig();
         durchlässig = true;
         setImage("Tür(geöffnet).png");
-        new Audioplayer().play("door_open.wav");
     }
     
     /**

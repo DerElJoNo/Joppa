@@ -148,6 +148,7 @@ public class Joppa extends Actor
                     if(a.getClass()==Schlüssel.class && tür.offen()==false)
                     {
                         tür.open();
+                        new Audioplayer().play("door_open.wav");
                     }
                     if(tür.offen()==true)
                     {
