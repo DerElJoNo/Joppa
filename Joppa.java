@@ -17,12 +17,12 @@ public class Joppa extends Actor
     public GreenfootImage joppa;
     public boolean left;
     private final int V = 8;
-    
+
     public Joppa()
     {
         inv = new Inventar();
     }
-    
+
     /**
      * Act - do whatever the Joppa wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
@@ -40,12 +40,12 @@ public class Joppa extends Actor
         essen();
         umlegen();
     }
-    
+
     public Inventar inv()
     {
         return inv;
     }
-    
+
     /**
      * 
      */
@@ -57,7 +57,7 @@ public class Joppa extends Actor
             s.umlegen();
         }        
     }
-    
+
     /**
      * 
      */
@@ -80,7 +80,7 @@ public class Joppa extends Actor
             }
         }
     }
-    
+
     /**
      * 
      */
@@ -88,24 +88,24 @@ public class Joppa extends Actor
     {
         for(int i=0; i<inv.größe(); i++)
         {
-             if(Greenfoot.isKeyDown(Integer.toString(i+1)))
-             {
-                 Item a = inv.ausgeben(i);
-                 if(a!=null)
-                 {
-                     if(left==true)
-                     {
-                         getWorld().addObject(a,getX()-16,getY());
-                     }
-                     if(left!=true)
-                     {
-                         getWorld().addObject(a,getX()+16,getY());
-                     }
-                 }
-             }
+            if(Greenfoot.isKeyDown(Integer.toString(i+1)))
+            {
+                Item a = inv.ausgeben(i);
+                if(a!=null)
+                {
+                    if(left==true)
+                    {
+                        getWorld().addObject(a,getX()-16,getY());
+                    }
+                    if(left!=true)
+                    {
+                        getWorld().addObject(a,getX()+16,getY());
+                    }
+                }
+            }
         }
     }
-    
+
     /**
      * 
      */
@@ -118,7 +118,7 @@ public class Joppa extends Actor
             getWorld().removeObject(i);
         }
     }
-    
+
     /**
      * 
      */
@@ -139,7 +139,7 @@ public class Joppa extends Actor
             {
                 return;
             }
-            
+
             for(int i=0; i<inv.größe(); i++)
             {
                 Item a = inv.ausgeben(i);
@@ -163,7 +163,6 @@ public class Joppa extends Actor
         }        
     }
 
-    
     /**
      * 
      */
@@ -171,7 +170,7 @@ public class Joppa extends Actor
     {
         return Leben;
     }
-    
+
     /**
      * 
      */
@@ -179,7 +178,7 @@ public class Joppa extends Actor
     {
         return Luft;
     }
-    
+
     /**
      * 
      */
@@ -192,7 +191,7 @@ public class Joppa extends Actor
             getWorld().removeObject(m);
         }
     }
-    
+
     /**
      * 
      */
@@ -203,7 +202,7 @@ public class Joppa extends Actor
             Leben= Leben-15;
         }
     }
-    
+
     /**
      * 
      */
@@ -211,23 +210,23 @@ public class Joppa extends Actor
     {
         if(Greenfoot.isKeyDown("r")||Leben<=0)
         {
-           World world = getWorld();
-           Level w = (Level)world;
-           Start start = w.start;
-           w.setzeSpieler(start.getX(), start.getY());
-           setImage("Joppa_links.png");
-           Leben = 100;
-           Luft = 100;
+            World world = getWorld();
+            Level w = (Level)world;
+            Start start = w.start;
+            w.setzeSpieler(start.getX(), start.getY());
+            setImage("Joppa_links.png");
+            Leben = 100;
+            Luft = 100;
         }
     }
-    
+
     /**
      * 
      */
     public void bewegen()
     {
         Block p = (Block)getOneIntersectingObject(Block.class);
-        
+
         if(Greenfoot.isKeyDown("left"))
         {
             for(int i=V; i>0; i--)
@@ -242,7 +241,7 @@ public class Joppa extends Actor
             left = true;
             setImage("Joppa_links.png");
         }
-        
+
         if(Greenfoot.isKeyDown("right"))
         {
             for(int i=V; i>0; i--)
@@ -257,7 +256,7 @@ public class Joppa extends Actor
             left = false;
             setImage("Joppa_rechts.png");
         }
-        
+
         if(Greenfoot.isKeyDown("up"))
         {
             for(int i=2*V; i>0; i--)
@@ -275,7 +274,7 @@ public class Joppa extends Actor
                 }
             }
         }
-        
+
         if(Greenfoot.isKeyDown("down"))
         {
             for(int i=2*V; i>=0; i--)
@@ -293,7 +292,7 @@ public class Joppa extends Actor
                 }
             }
         }
-        
+
         if((Block)getOneTouchingObject("o", Block.class, V) instanceof Wasser)
         {
             Luft=Luft-2;
@@ -302,12 +301,12 @@ public class Joppa extends Actor
                 Leben=Leben-5;
             }
         }
-        
+
         if(getOneTouchingObject("o",Wasser.class, V)==null)
         {
             Luft=100;
         }
-        
+
         if((Block)getOneTouchingObject("o", Block.class, V)==null && Greenfoot.isKeyDown("space"))
         {
             Block l = (Block)getOneTouchingObject("l", Block.class, V);
@@ -327,7 +326,7 @@ public class Joppa extends Actor
             }
         }
     }
-    
+
     /**
      * 
      */
@@ -339,12 +338,30 @@ public class Joppa extends Actor
         }
         for(int i = V; i>0; i--)
         {
-            Block u = (Block)getOneTouchingObject("u",Block.class, i);
-            if(u instanceof Undurchfallbar)
+            Actor u = null;
+            List<Actor> a = getTouchingObjects("u",Block.class, i);
+            for(int j = 0; j<a.size(); j++)
+            {
+                if(a.get(j) instanceof Undurchfallbar)
+                {
+                    u = a.get(j);
+                }
+            }
+
+            if(u != null)
             {
                 int h=i-1;
-                Block b =(Block)getOneTouchingObject("u",Block.class,h);
-                if(!(b instanceof Undurchfallbar))
+                Actor b = null;
+                List<Actor> c = getTouchingObjects("u",Block.class,h);
+                for(int l = 0; l<c.size(); l++)
+                {
+                    if(!(c.get(l) instanceof Undurchfallbar))
+                    {
+                        b = c.get(l);
+                    }
+                }
+
+                if(b != null)
                 {
                     Fallhöhe = Fallhöhe + h;
                     if(Fallhöhe>=6*V)
@@ -361,10 +378,10 @@ public class Joppa extends Actor
                 setLocation(getX(),getY()+V);
                 Fallhöhe = Fallhöhe + V;
                 break;
-            } 
+            }
         }
     }
-    
+
     public Actor getOneTouchingObject(String x, Class b, int offset)
     {
         Actor a = null;
@@ -379,13 +396,13 @@ public class Joppa extends Actor
         } else if(x == "r") {
             XChange = offset;
         }
-        
+
         setLocation(getX() + XChange, getY() + YChange);
         Actor iActor = getOneIntersectingObject(b);
         if(iActor!=null)
         {
             boolean correctDirection = false;
-            
+
             if(x == "u") {
                 correctDirection = iActor.getY() >= getY();
             } else if(x == "l") {
@@ -395,7 +412,7 @@ public class Joppa extends Actor
             } else if(x == "r") {
                 correctDirection = iActor.getX() >= getX();
             }
-            
+
             if(correctDirection) {
                 a = iActor;
             }
