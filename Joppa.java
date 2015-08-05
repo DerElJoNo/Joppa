@@ -280,8 +280,13 @@ public class Joppa extends Actor
         {
             for(int i=2*V; i>=0; i--)
             {
-                Block u = (Block)getOneTouchingObject("u", Block.class, i-1);
-                if(u!=null && u.durchlässig()==true)
+                if(getOneTouchingObject("u", Leiter.class, i)!=null)
+                {
+                    setLocation(getX(),getY()+i);
+                    break;
+                }
+                Block u = (Block)getOneTouchingObject("u", Block.class, i);
+                if(getOneIntersectingObject(Wasser.class)!=null && u instanceof Wasser)
                 {
                     setLocation(getX(),getY()+i);
                     break;
@@ -382,13 +387,13 @@ public class Joppa extends Actor
             boolean correctDirection = false;
             
             if(x == "u") {
-                correctDirection = iActor.getY() > getY();
+                correctDirection = iActor.getY() >= getY();
             } else if(x == "l") {
-                correctDirection = iActor.getX() < getX();
+                correctDirection = iActor.getX() <= getX();
             } else if(x == "o") {
-                correctDirection = iActor.getY() < getY();
+                correctDirection = iActor.getY() <= getY();
             } else if(x == "r") {
-                correctDirection = iActor.getX() > getX();
+                correctDirection = iActor.getX() >= getX();
             }
             
             if(correctDirection) {
