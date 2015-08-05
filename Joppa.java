@@ -167,7 +167,7 @@ public class Joppa extends Actor
     /**
      * 
      */
-    public int Leben()
+    public int getLeben()
     {
         return Leben;
     }
@@ -175,7 +175,7 @@ public class Joppa extends Actor
     /**
      * 
      */
-    public int Luft()
+    public int getLuft()
     {
         return Luft;
     }

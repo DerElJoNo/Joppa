@@ -18,7 +18,7 @@ public class Luftleiste extends Actor
         World world = getWorld();
         Level welt = (Level)world;
         Joppa joppa1 = welt.joppa1();
-        Luft = joppa1.Luft();
+        Luft = joppa1.getLuft();
         
         setImage(new GreenfootImage(102,16));
         GreenfootImage Leiste = getImage();
