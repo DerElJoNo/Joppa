@@ -233,8 +233,17 @@ public class Joppa extends Actor
         {
             for(int i=V; i>0; i--)
             {
-                Block l = (Block)getOneTouchingObject("l", Block.class, i);
-                if(l==null || l.durchlässig()==true)
+                Block l = null;
+                List<Actor> m = getTouchingObjects("l", Block.class, i);
+                for(int j = 0; j < m.size(); j++)
+                {
+                    Block b = (Block) m.get(j);
+                    if(b.durchlässig() == false)
+                    {
+                        l = b;
+                    }
+                }
+                if(l == null)
                 {
                     setLocation(getX()-i,getY());
                     break;
@@ -248,8 +257,17 @@ public class Joppa extends Actor
         {
             for(int i=V; i>0; i--)
             {
-                Block r = (Block)getOneTouchingObject("r", Block.class, i);
-                if(r==null || r.durchlässig()==true)
+                Block r = null;
+                List<Actor> m = getTouchingObjects("r", Block.class, i);
+                for(int j = 0; j < m.size(); j++)
+                {
+                    Block b = (Block) m.get(j);
+                    if(b.durchlässig() == false)
+                    {
+                        r = b;
+                    }
+                }
+                if(r == null)
                 {
                     setLocation(getX()+i,getY());
                     break;
