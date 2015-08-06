@@ -313,8 +313,9 @@ public class Joppa extends Actor
         {
             Block l = (Block)getOneTouchingObject("l", Block.class, V);
             Block r = (Block)getOneTouchingObject("r", Block.class, V);
-            Block u = (Block)getOneTouchingObject("u", Block.class, 1);
-            if(u instanceof Wand || u instanceof Leiter)
+            Block u = (Block)getOneTouchingObject("u", Undurchfallbar.class, 1);
+            Block v = (Block)getOneTouchingObject("u", Leiter.class, 1);
+            if(u !=null || v != null)
             {
                 setLocation(getX(),getY()-3*V);
                 setLocation(getX(),getY());
@@ -338,48 +339,21 @@ public class Joppa extends Actor
         {
             return;
         }
-        for(int i = V; i>0; i--)
+
+        for(int i = 0; i<=V; i++)
         {
-            Actor u = null;
-            List<Actor> a = getTouchingObjects("u",Block.class, i);
-            for(int j = 0; j<a.size(); j++)
+            Actor u = getOneTouchingObject("u",Undurchfallbar.class, i);
+            if(u == null)
             {
-                if(a.get(j) instanceof Undurchfallbar)
+                int h = i+1;
+                Actor v = getOneTouchingObject("u",Undurchfallbar.class, h);
+                if(i == V || v != null)
                 {
-                    u = a.get(j);
+                    setLocation(getX(), getY()+i);
+                    u = null;
+                    v = null;
+                    return;
                 }
-            }
-
-            if(u != null)
-            {
-                int h=i-1;
-                Actor b = null;
-                List<Actor> c = getTouchingObjects("u",Block.class,h);
-                for(int l = 0; l<c.size(); l++)
-                {
-                    if(!(c.get(l) instanceof Undurchfallbar))
-                    {
-                        b = c.get(l);
-                    }
-                }
-
-                if(b != null)
-                {
-                    Fallhöhe = Fallhöhe + h;
-                    if(Fallhöhe>=6*V)
-                    {
-                        Leben= Leben - (Fallhöhe*Fallhöhe)/150;
-                    }
-                    setLocation(getX(),getY()+h);
-                    Fallhöhe = 0;
-                    break;
-                }
-            }
-            else
-            {
-                setLocation(getX(),getY()+V);
-                Fallhöhe = Fallhöhe + V;
-                break;
             }
         }
     }
