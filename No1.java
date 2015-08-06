@@ -28,39 +28,12 @@ public class No1 extends Level
         addObject(new Tür(), unit(47), unit(34));
         addObject(new Schlüssel(), unit(44), unit(27));
         
-        for(int a = 34; a>23; a--)
-        {
-            addObject(new Wand(), unit(33), unit(a));
-        }
-        
-        for(int b = 33; b<55; b++)
-        {
-            addObject(new Wand(), unit(b), unit(23));
-        }
-        
-        for(int c = 34; c<47; c++)
-        {
-            addObject(new Wand(), unit(c), unit(32));
-        }
-        
-        for(int d = 33; d>28; d--)
-        {
-            addObject(new Wand(), unit(47), unit(d));
-        }
-        
-        for(int e = 40; e<53; e++)
-        {
-            addObject(new Wand(), unit(e), unit(28));
-        }
-        
-        for(int f = 24; f<28; f++)
-        {
-            addObject(new Wand(), unit(40), unit(f));
-        }
-        
-        for(int g = 34; g>27; g--)
-        {
-            addObject(new Leiter(), unit(53), unit(g));
-        }
+        newWandRow(33,24,33,34);
+        newWandRow(33,23,54,23);
+        newWandRow(34,32,46,32);
+        newWandRow(47,29,47,33);
+        newWandRow(40,28,52,28);
+        newWandRow(40,24,40,27);
+        newLeiterRow(53,28,53,34);
     }
 }
