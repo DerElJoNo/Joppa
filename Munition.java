@@ -14,6 +14,7 @@ public class Munition extends Block
     public Munition(int Rotation)
     {
         R= Rotation;
+        durchlässig = true;
     }
     
     /**
@@ -25,7 +26,6 @@ public class Munition extends Block
         fliegen();
         setRotation(R);
         auflösen();
-        setDurchlässig();
     }
     
     /**

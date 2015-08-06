@@ -8,6 +8,11 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Feuer extends Block
 {
+    public Feuer()
+    {
+        durchlässig = true;
+    }
+    
     /**
      * Act - do whatever the Feuer wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
@@ -15,7 +20,6 @@ public class Feuer extends Block
     public void act() 
     {
         ChangePicture();
-        setDurchlässig();
     }
     
     /**

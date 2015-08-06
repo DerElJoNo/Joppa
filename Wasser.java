@@ -13,6 +13,7 @@ public class Wasser extends Block implements Undurchfallbar
     public Wasser(int volume)
     {
         v = volume;
+        durchlässig = true;
     }
     
     /**
@@ -22,7 +23,6 @@ public class Wasser extends Block implements Undurchfallbar
     public void act() 
     {
         fließen();
-        setDurchlässig();
         gravitationAus();
         addieren();
     }

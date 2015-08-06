@@ -13,13 +13,13 @@ public class Kolben extends Elektronik implements Undurchfallbar
     int xChange;
     int yChange;
     Block block = null;
+    
     /**
      * Act - do whatever the Kolben wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public void act() 
     {
-        setUndurchlässig();
         if(ein == true && verschoben == false)
         {
             ausfahren();
@@ -35,6 +35,7 @@ public class Kolben extends Elektronik implements Undurchfallbar
         super(x, y, ein);
         setRotation((dir-1)*90);
         direction = dir;
+        durchlässig = false;
     }
     
     public void setNachbarblock()

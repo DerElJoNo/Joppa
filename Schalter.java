@@ -16,7 +16,6 @@ public class Schalter extends Block
     {
         setzeBild();
         setzeDependends();
-        setDurchlässig();
     }
 
     SchalterDependList list;
@@ -37,6 +36,7 @@ public class Schalter extends Block
     public Schalter(SchalterDependList dependList)
     {
         list = dependList;
+        durchlässig = true;
     }
 
     public void setzeDependends()

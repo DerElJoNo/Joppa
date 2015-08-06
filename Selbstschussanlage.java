@@ -12,6 +12,11 @@ public class Selbstschussanlage extends Block implements Undurchfallbar
     public final int Range=50;
     public long zeit;
     public boolean geladen;
+    
+    public Selbstschussanlage()
+    {
+        durchlässig = false;
+    }
 
     /**
      * Act - do whatever the Selbstschussanlage wants to do. This method is called whenever
@@ -20,7 +25,6 @@ public class Selbstschussanlage extends Block implements Undurchfallbar
     public void act() 
     {
         eliminateTarget(Joppa.class);
-        setUndurchlässig();
     }
     
     /**

@@ -8,12 +8,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Wand extends Block implements Undurchfallbar
 {
-    /**
-     * Act - do whatever the Wand wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-    public void act() 
+    public Wand()
     {
-        setUndurchlässig();
-    }   
+        durchlässig = false;
+    } 
 }

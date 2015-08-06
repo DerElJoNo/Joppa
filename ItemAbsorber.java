@@ -16,7 +16,6 @@ public class ItemAbsorber extends Elektronik
      */
     public void act() 
     {
-        setDurchlässig();
         absorbiereItems();
         setzeBild();
     }
@@ -25,6 +24,7 @@ public class ItemAbsorber extends Elektronik
     {
         super(x, y, ein);
         senkrecht = s;
+        durchlässig = true;
     }
     
     public void setzeBild()
