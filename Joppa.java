@@ -12,11 +12,8 @@ public class Joppa extends Actor
 {
     public int Leben=100;
     public int Fallhöhe;
-    public int x;
-    public int y;
     public int Luft=100;
     public Inventar inv;
-    public GreenfootImage joppa;
     public boolean left;
     private final int V = 8;
     public int münzen;
