@@ -16,8 +16,7 @@ public class Ziel extends Actor
     {
         if(getOneIntersectingObject(Joppa.class)!=null && Greenfoot.isKeyDown("o"))
         {
-            World welt = getWorld();
-            Level aktuellesLevel = (Level) welt;
+            Level aktuellesLevel = (Level) getWorld();
             Level naechstesLevel = LevelManager.getInstance().getNextLevel(aktuellesLevel);
             Greenfoot.setWorld(naechstesLevel);
         }
