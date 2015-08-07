@@ -19,6 +19,7 @@ public class Joppa extends Actor
     public GreenfootImage joppa;
     public boolean left;
     private final int V = 8;
+    public int münzen;
 
     public Joppa()
     {
@@ -118,6 +119,12 @@ public class Joppa extends Actor
             Item i = (Item)getOneIntersectingObject(Item.class);
             inv.einfügen(i);
             getWorld().removeObject(i);
+        }
+        if(getOneIntersectingObject(Münze.class) != null)
+        {
+            Münze m = (Münze)getOneIntersectingObject(Münze.class);
+            münzen = münzen + m.getWert();
+            getWorld().removeObject(m);
         }
     }
 

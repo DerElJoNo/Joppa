@@ -114,6 +114,8 @@ public class Level extends World
         {
             addObject(new Inventarfeld(i), (getWidth()/2) - (joppa1.inv.größe() * SIZE / 2) + unit(i), unit(1));
         }
+        
+        addObject(new MünzenCounter(joppa1), getWidth()/2 + 8*SIZE, unit(1));
     }
     
     /**
