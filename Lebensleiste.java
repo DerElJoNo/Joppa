@@ -17,7 +17,7 @@ public class Lebensleiste extends Actor
     {
         World world = getWorld();
         Level welt = (Level)world;
-        Joppa joppa1 = welt.joppa1();
+        Joppa joppa1 = welt.joppa();
         Leben = joppa1.getLeben();
         
         setImage(new GreenfootImage(102,16));

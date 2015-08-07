@@ -13,7 +13,7 @@ public class Level extends World
     int x;
     int y;
     int level;
-    Joppa joppa1 = new Joppa();
+    Joppa joppa;
     Audioplayer audio = new Audioplayer();
     Start start = new Start();
     
@@ -24,6 +24,7 @@ public class Level extends World
     public Level()
     {    
         super(56*SIZE, 36*SIZE, 1);
+        joppa = Safe.getJoppa();
     }
     
     public Audioplayer getAudioplayer()
@@ -82,8 +83,8 @@ public class Level extends World
     public void setzeSpieler(int x, int y)
     {
         addObject(start, x, y);
-        addObject(joppa1, start.getX(), start.getY());
-        joppa1.setLocation(start.getX(), start.getY());
+        addObject(joppa, start.getX(), start.getY());
+        joppa.setLocation(start.getX(), start.getY());
     }
     
     /**
@@ -91,7 +92,6 @@ public class Level extends World
      */
     public void setzeStandart()
     {
-        
         Lebensleiste lebensleiste = new Lebensleiste();
         addObject(lebensleiste, unit(5), unit(1));
         
@@ -110,19 +110,19 @@ public class Level extends World
             addObject(new Wand(), getWidth() - MITTE, b);
         }
         
-        for(int i=0; i< joppa1.inv.größe(); i++)
+        for(int i=0; i< joppa.inv.größe(); i++)
         {
-            addObject(new Inventarfeld(i), (getWidth()/2) - (joppa1.inv.größe() * SIZE / 2) + unit(i), unit(1));
+            addObject(new Inventarfeld(i), (getWidth()/2) - (joppa.inv.größe() * SIZE / 2) + unit(i), unit(1));
         }
         
-        addObject(new MünzenCounter(joppa1), getWidth()/2 + 8*SIZE, unit(1));
+        addObject(new MünzenCounter(joppa), getWidth()/2 + 8*SIZE, unit(1));
     }
     
     /**
      * 
      */
-    public Joppa joppa1()
+    public Joppa joppa()
     {
-        return joppa1;
+        return joppa;
     }
 }

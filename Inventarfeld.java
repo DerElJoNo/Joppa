@@ -16,7 +16,7 @@ public class Inventarfeld extends Actor
     {
         World world = getWorld();
         Level welt = (Level)world;
-        Joppa joppa1 = welt.joppa1();
+        Joppa joppa1 = welt.joppa();
         inv = joppa1.inv();
         Item i = inv.ausgeben(position);
         inv.einfügen(i);

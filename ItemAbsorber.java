@@ -59,7 +59,7 @@ public class ItemAbsorber extends Elektronik
     public void absorbiereItems()
     {
         Level w =(Level)getWorld();
-        Joppa joppa = w.joppa1();
+        Joppa joppa = w.joppa();
         if(getOneIntersectingObject(Joppa.class)!=null && ein == true)
         {
             for(int i = 0; i < joppa.inv.größe();i++)
