@@ -14,11 +14,11 @@ public class No2 extends Level
      * 
      */
     public No2()
-    {    
-        no2();    
-        setzeStandart();
-        setzeSpieler(unit(30), unit(34));
+    { 
         setLevel(2);
+        setzeStandart(); 
+        no2();
+        setzeSpieler(unit(30), unit(34));  
     }
     
     public void no2()

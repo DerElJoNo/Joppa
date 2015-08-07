@@ -15,10 +15,10 @@ public class No1 extends Level
      */
     public No1()
     {
-        no1();    
+        setLevel(1);  
         setzeStandart();
-        setzeSpieler(unit(51), unit(34));
-        setLevel(1);
+        no1();
+        setzeSpieler(unit(51), unit(34));  
     }
     
     public void no1()
