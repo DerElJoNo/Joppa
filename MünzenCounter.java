@@ -27,7 +27,7 @@ public class MünzenCounter extends Actor
         
         if(münzen < 1000)
         {
-            score = new GreenfootImage(String.format("%03d", (int)münzen) , 18, Color.BLACK, Color.WHITE);
+            score = new GreenfootImage(String.format("%d", (int)münzen) , 18, Color.BLACK, Color.WHITE);
         }
         if(münzen >= 1000 && münzen < 1000000)
         {
