@@ -71,6 +71,12 @@ public class Guard extends Mob
                 right = true;
             }
         }
+        
+        if(leben <= 0)
+        {
+            getWorld().addObject(new Münze(power), getX(), getY());
+            getWorld().removeObject(this);
+        }
     }
 
     public void angreifen(Joppa ziel)
